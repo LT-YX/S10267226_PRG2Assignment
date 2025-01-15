@@ -14,5 +14,20 @@ namespace PRG02_Assignment
 {
     public class Airline
     {
+        public string Name { get; set; };
+        public string Code { get; set; };
+        public Dictionary<string, Flight> Flights { get; set; } = new Dictionary<string, Flight>();
+
+        //Default Constructor
+        public Airline() { };
+
+        //Parameterized Constructor
+        public Airline(string name, string code)
+        {
+            Name = name;
+            Code = code;
+        }
     }
 }
+
+
