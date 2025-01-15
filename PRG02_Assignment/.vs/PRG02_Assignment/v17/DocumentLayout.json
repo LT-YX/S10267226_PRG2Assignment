@@ -1,10 +1,42 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\lovet\\Documents\\AY2024SEM2\\Programming II\\Assignment\\PRG02_Assignment\\",
+  "WorkspaceRootPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\documents\\ay2024sem2\\programming ii\\assignment\\prg02_assignment\\prg02_assignment\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\cfftflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\cfftflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\ddjbflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\ddjbflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\lwttflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\lwttflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\normflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\normflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\flight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\flight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\terminal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\terminal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\airline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\airline.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\boardinggate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{034C5579-B9A8-4DDD-95CE-64131C1AF7C1}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\boardinggate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,24 +46,128 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 8,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CFFTFlight.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\CFFTFlight.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\CFFTFlight.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\CFFTFlight.cs",
+              "RelativeToolTip": "PRG02_Assignment\\CFFTFlight.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T10:19:51.216Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DDJBFlight.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\DDJBFlight.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\DDJBFlight.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\DDJBFlight.cs",
+              "RelativeToolTip": "PRG02_Assignment\\DDJBFlight.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T10:19:09.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LWTTFlight.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\LWTTFlight.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\LWTTFlight.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\LWTTFlight.cs",
+              "RelativeToolTip": "PRG02_Assignment\\LWTTFlight.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T10:17:39.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NORMFlight.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\NORMFlight.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\NORMFlight.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\NORMFlight.cs",
+              "RelativeToolTip": "PRG02_Assignment\\NORMFlight.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T10:17:00.139Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Flight.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Flight.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\Flight.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Flight.cs",
+              "RelativeToolTip": "PRG02_Assignment\\Flight.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T10:15:57.168Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Terminal.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Terminal.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\Terminal.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Terminal.cs",
+              "RelativeToolTip": "PRG02_Assignment\\Terminal.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T10:11:07.41Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BoardingGate.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\BoardingGate.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\BoardingGate.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\BoardingGate.cs",
+              "RelativeToolTip": "PRG02_Assignment\\BoardingGate.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T10:10:34.184Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Airline.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Airline.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\Airline.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Airline.cs",
+              "RelativeToolTip": "PRG02_Assignment\\Airline.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T10:09:05.205Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\lovet\\Documents\\AY2024SEM2\\Programming II\\Assignment\\PRG02_Assignment\\PRG02_Assignment\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Program.cs",
               "RelativeDocumentMoniker": "PRG02_Assignment\\Program.cs",
-              "ToolTip": "C:\\Users\\lovet\\Documents\\AY2024SEM2\\Programming II\\Assignment\\PRG02_Assignment\\PRG02_Assignment\\Program.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Program.cs",
               "RelativeToolTip": "PRG02_Assignment\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAADAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-15T08:24:52.261Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             }
           ]
         }
