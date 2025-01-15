@@ -11,3 +11,5 @@ build_property.RootNamespace = PRG02_Assignment
 build_property.ProjectDir = C:\Users\lovet\OneDrive\Documents\GitHub\PRG02_Assignment\PRG02_Assignment\PRG02_Assignment\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
