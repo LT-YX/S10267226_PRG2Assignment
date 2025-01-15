@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lovet\\Documents\\AY2024SEM2\\Programming II\\Assignment\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment.csproj",
+      "projectUniqueName": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment.csproj",
       "projectName": "PRG02_Assignment",
-      "projectPath": "C:\\Users\\lovet\\Documents\\AY2024SEM2\\Programming II\\Assignment\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment.csproj",
+      "projectPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment.csproj",
       "packagesPath": "C:\\Users\\lovet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lovet\\Documents\\AY2024SEM2\\Programming II\\Assignment\\PRG02_Assignment\\PRG02_Assignment\\obj\\",
+      "outputPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lovet\\AppData\\Roaming\\NuGet\\NuGet.Config",
