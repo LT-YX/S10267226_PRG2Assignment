@@ -5,6 +5,13 @@
 // Student 2 Name : Tan Sheng Zhe Zander
 //==========================================================
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
 namespace PRG02_Assignment
 {
     public class Terminal
@@ -15,6 +22,5 @@ namespace PRG02_Assignment
         public Dictionary<string, BoardingGate> BoardingGates { get; set; } = new Dictionary<string, BoardingGate>();
         public Dictionary<string, Double> GateFee { get; set; } = new Dictionary<string, Double>();
 
-
-
     }
+}
