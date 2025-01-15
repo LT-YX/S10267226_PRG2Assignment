@@ -8,5 +8,11 @@ namespace PRG02_Assignment
 {
     internal class test
     {
+
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+
     }
 }
