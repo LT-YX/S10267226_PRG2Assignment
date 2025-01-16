@@ -1,0 +1,4 @@
+C:\Users\lovet\Downloads\PRG02_Assignment\PRG02_Assignment\obj\Debug\net8.0\PRG02_Assignment.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lovet\Downloads\PRG02_Assignment\PRG02_Assignment\obj\Debug\net8.0\PRG02_Assignment.AssemblyInfoInputs.cache
+C:\Users\lovet\Downloads\PRG02_Assignment\PRG02_Assignment\obj\Debug\net8.0\PRG02_Assignment.AssemblyInfo.cs
+C:\Users\lovet\Downloads\PRG02_Assignment\PRG02_Assignment\obj\Debug\net8.0\PRG02_Assignment.csproj.CoreCompileInputs.cache
