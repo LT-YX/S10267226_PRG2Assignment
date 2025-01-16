@@ -8,7 +8,7 @@
 using PRG02_Assignment;
 
 // Main Program
-
+loadFlights();
 
 // Methods
 
@@ -38,8 +38,18 @@ void loadFlights()
         while ((s = sr.ReadLine()) != null)
         {
             string[] information = s.Split(",");
-            Console.WriteLine(information);
-            Console.WriteLine(information.Length);
+            if (information[4] == "")
+            {
+                NORMFlight nf = new NORMFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4]); // NormFlight
+                Console.WriteLine("Normal flight created");
+            }
+            //else
+            //{
+                /*if (information[4] == "LWTT")
+                {
+                    
+                }*/
+           // }
         }
     }
 }

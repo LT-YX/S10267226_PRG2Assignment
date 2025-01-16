@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\prg02_assignment.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\prg02_assignment.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\terminal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\terminal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\boardinggate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\boardinggate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\prg02_assignment.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\prg02_assignment.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,23 +26,52 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Terminal.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Terminal.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\Terminal.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Terminal.cs",
+              "RelativeToolTip": "PRG02_Assignment\\Terminal.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABIAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-16T18:47:07.228Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BoardingGate.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\BoardingGate.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\BoardingGate.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\BoardingGate.cs",
+              "RelativeToolTip": "PRG02_Assignment\\BoardingGate.cs",
+              "ViewState": "AQIAABgAAAAAAAAAAAAowBcAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-16T18:46:17.327Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Program.cs",
               "RelativeDocumentMoniker": "PRG02_Assignment\\Program.cs",
               "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Program.cs",
               "RelativeToolTip": "PRG02_Assignment\\Program.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAxwCkAAAAyAAAA",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAswAYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-16T17:56:45.661Z"
+              "WhenOpened": "2025-01-16T18:43:55.634Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "PRG02_Assignment.csproj",
               "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment.csproj",
               "RelativeDocumentMoniker": "PRG02_Assignment\\PRG02_Assignment.csproj",
@@ -42,8 +79,7 @@
               "RelativeToolTip": "PRG02_Assignment\\PRG02_Assignment.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-01-16T17:56:38.74Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-16T18:41:23.24Z"
             }
           ]
         }

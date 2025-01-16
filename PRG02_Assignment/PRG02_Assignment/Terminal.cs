@@ -16,7 +16,7 @@ namespace PRG02_Assignment
 {
     public class Terminal
     {
-        public string TerminalName { get; set; };
+        public string TerminalName { get; set; }
         public Dictionary<string, Airline> Airlines { get; set; } = new Dictionary<string, Airline>();
         public Dictionary<string, Flight> Flights { get; set; } = new Dictionary<string, Flight>();
         public Dictionary<string, BoardingGate> BoardingGates { get; set; } = new Dictionary<string, BoardingGate>();
