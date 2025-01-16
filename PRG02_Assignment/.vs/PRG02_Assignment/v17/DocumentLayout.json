@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\prg02_assignment.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\prg02_assignment.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|c:\\users\\lovet\\onedrive\\documents\\github\\prg02_assignment\\prg02_assignment\\prg02_assignment\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EE42031-3DCA-4F34-B6CB-6F083B1E958E}|PRG02_Assignment\\PRG02_Assignment.csproj|solutionrelative:prg02_assignment\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Program.cs",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\Program.cs",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\Program.cs",
+              "RelativeToolTip": "PRG02_Assignment\\Program.cs",
+              "ViewState": "AQIAACAAAAAAAAAAAAAxwCkAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-16T17:56:45.661Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PRG02_Assignment.csproj",
+              "DocumentMoniker": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment.csproj",
+              "RelativeDocumentMoniker": "PRG02_Assignment\\PRG02_Assignment.csproj",
+              "ToolTip": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment\\PRG02_Assignment.csproj",
+              "RelativeToolTip": "PRG02_Assignment\\PRG02_Assignment.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-01-16T17:56:38.74Z",
+              "EditorCaption": ""
             }
           ]
         }
