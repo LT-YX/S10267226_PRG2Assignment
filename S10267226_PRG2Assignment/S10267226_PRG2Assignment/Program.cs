@@ -7,13 +7,19 @@
 
 using S10267226_PRG2Assignment;
 
+//
+Dictionary<string, Flight> flightDictionary = new Dictionary<string, Flight>();
+
+
 // Main Program
-loadFlights();
+LoadFlights();
+ListFlights();
+
 
 // Methods
 
 // Displays menu
-void displayMenu()
+void DisplayMenu()
 {
     Console.WriteLine("=============================================" +
         "\nWelcome to Changi Airport Terminal 5" +
@@ -30,7 +36,7 @@ void displayMenu()
 
 // Feature 2
 
-void loadFlights()
+void LoadFlights()
 {
     using (StreamReader sr = new StreamReader("flights.csv"))
     {
@@ -41,15 +47,41 @@ void loadFlights()
             if (information[4] == "")
             {
                 NORMFlight nf = new NORMFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4]); // NormFlight
-                Console.WriteLine("Normal flight created");
+                flightDictionary.Add(information[0], nf);
             }
-            //else
-            //{
-            /*if (information[4] == "LWTT")
+            else
             {
+                if (information[4] == "LWTT")
+                {
+                    LWTTFlight lf = new LWTTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4],500.00); // LWTTFlight
+                    flightDictionary.Add(information[0], lf);
 
-            }*/
-            // }
+                }
+                else if (information[4] == "CFFT")
+                {
+                    CFFTFlight cf = new CFFTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 150.00); // CFFTFlight
+                    flightDictionary.Add(information[0], cf);
+                }
+                else
+                {
+                    DDJBFlight df = new DDJBFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 300.00); // DJJBFlight
+                    flightDictionary.Add(information[0], df);
+
+                }
+            }
         }
+    }
+}
+
+// Feature 3
+void ListFlights()
+{
+    Console.WriteLine("=============================================\n" +
+        "List of Flights for Changi Airport Terminal 5\n" +
+        "=============================================");
+    Console.WriteLine($"{"Flight Number",-15} {"Airline Name",-21} {"Origin",-21} {"Destination",-19} {"Expected Departure/Arrival Time"}");
+    foreach (Flight f in flightDictionary.Values)
+    {
+        Console.WriteLine($"{f.FlightNumber,-15} {"airline",-21} {f.Origin,-21} {f.Destination,-19} {f.ExpectedTime}");
     }
 }
