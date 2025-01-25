@@ -27,5 +27,17 @@ namespace S10267226_PRG2Assignment
             SupportsLWTT = supportsLWTT;
             Flight = flight;
         }
+
+        //Methods
+        public double CalculateFees()
+        {
+            double basefee = 300;
+            return basefee;
+        }
+
+        public override string ToString()
+        {
+            return $"Gate: {GateName,-10} Supports CFFT: {SupportsCFFT,-10} Supports DDJB: {SupportsDDJB,-10} Supports LWTT: {SupportsLWTT,-10} Flight: {Flight}";
+        }
     }
 }
