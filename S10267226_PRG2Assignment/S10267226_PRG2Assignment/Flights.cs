@@ -4,6 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//==========================================================
+// Student Number : S10267226
+// Student Name : Lovette Tew Yu Xin
+// Partner Name : Tan Sheng Zhe Zander
+//===========================================================
+
 namespace S10267226_PRG2Assignment
 {
     public abstract class Flight
