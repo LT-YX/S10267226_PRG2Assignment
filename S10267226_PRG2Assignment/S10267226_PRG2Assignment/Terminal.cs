@@ -12,7 +12,7 @@ namespace S10267226_PRG2Assignment
         public Dictionary<string, Airline> Airlines { get; set; } = new Dictionary<string, Airline>();
         public Dictionary<string, Flight> Flights { get; set; } = new Dictionary<string, Flight>();
         public Dictionary<string, BoardingGate> BoardingGates { get; set; } = new Dictionary<string, BoardingGate>();
-        public Dictionary<string, Double> GateFee { get; set; } = new Dictionary<string, Double>();
+        public Dictionary<string, double> GateFee { get; set; } = new Dictionary<string, double>();
 
         public Terminal() { }
         public Terminal(string terminalName)
@@ -40,7 +40,7 @@ namespace S10267226_PRG2Assignment
             return true;
         }
 
-        public Airline GetAirlineFromFlight(Flight Flight)
+        public Airline? GetAirlineFromFlight(Flight Flight)
         {
             foreach (var airline in Airlines.Values)
             {

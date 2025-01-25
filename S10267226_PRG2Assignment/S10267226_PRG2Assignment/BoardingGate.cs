@@ -19,7 +19,7 @@ namespace S10267226_PRG2Assignment
         public BoardingGate() { }
 
         //Parameterized Constructor
-        public BoardingGate(string gateName, bool supportsCFFT, bool supportsDDJB, bool supportsLWTT)
+        public BoardingGate(string gateName, bool supportsCFFT, bool supportsDDJB, bool supportsLWTT, Flight? flight)
         {
             GateName = gateName;
             SupportsCFFT = supportsCFFT;

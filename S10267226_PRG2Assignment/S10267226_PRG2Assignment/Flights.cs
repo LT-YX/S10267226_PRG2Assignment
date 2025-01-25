@@ -27,7 +27,19 @@ namespace S10267226_PRG2Assignment
         }
 
         //Methods
-        public abstract double CalculateFees();
+        public virtual double CalculateFees()
+        {
+            double fees = 300.0; // Base fee for boarding gate
+            if (Origin == "SIN")
+            {
+                fees += 500.0;
+            }
+            if (Destination == "SIN")
+            {
+                fees += 800.0;
+            }
+            return fees;
+        }
 
         public override string ToString()
         {
