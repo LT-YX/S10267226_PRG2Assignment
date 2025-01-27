@@ -54,7 +54,7 @@ while (option != "0")
 
             break;
         case "7":
-   
+            DisplayFlightSchedule();
             break;
         case "0":
 
@@ -231,6 +231,7 @@ void DisplayFlightSchedule()
         {
             Console.WriteLine($"{f.Name,-20} {f.Code,-10}");
         }
+        Console.WriteLine();
 
         Console.Write("Pls enter the airline Code: ");
         string airlineCode = Console.ReadLine();
@@ -239,11 +240,40 @@ void DisplayFlightSchedule()
 
         if (airlineDictionary.ContainsKey(airlineCode))
         {
-            Console.WriteLine($"{"Flight Number",-15} {"Airline Name",-21} {"Origin",-21} {"Destination",-19}");
-            foreach(Flight f in airlineDictionary[airlineCode].Flights.Values)
+            Console.WriteLine($"{"Flight Number",-15} {"Origin",-21} {"Destination",-19}");
+            foreach(Flight f in flightDictionary.Values)
             {
+                string[] airlineCode2 = f.FlightNumber.Split(' ');
+                if (airlineCode2[0] == airlineCode)
+                {
+                    Console.WriteLine($"{f.FlightNumber,-15} {f.Origin,-21} {f.Destination,-19}");
+                }
+            }
 
-                Console.WriteLine($"{f.FlightNumber,-15} {f.Origin,-21} {f.Destination,-19}");
+            Console.WriteLine();
+            Console.Write("Pls enter the flight number: ");
+            string selectedFlightNumber = Console.ReadLine();
+
+            foreach (Flight A in flightDictionary.Values)
+            {
+                string[] airlineCode2 = A.FlightNumber.Split(' ');
+                if (airlineCode2[0] == airlineCode)
+                {
+                    if (airlineCode2[1] == selectedFlightNumber)
+                    {
+                        Console.WriteLine($"{"Flight Number",-15} {"Origin",-21} {"Destination",-23} {"Expected Time",-23} {"Status",-23} {"Fees",-23}");
+                        Console.WriteLine(
+                            $"{A.FlightNumber,-15} " +
+                            $"{A.Origin,-21}" +
+                            $"{A.Destination,-23}" +
+                            $"{A.ExpectedTime,-23} " +
+                            $"{A.Status,-23} " +
+                            $"{A.CalculateFees(),-23}"
+                            );
+                        break;
+                    }
+
+                }
             }
         }
 
@@ -253,7 +283,7 @@ void DisplayFlightSchedule()
         }
     }
 
-    catch (Exception ex)
+    catch
     {
         Console.WriteLine("Pls Enter Valid Input");
     }
