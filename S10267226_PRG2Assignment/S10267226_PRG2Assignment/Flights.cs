@@ -4,6 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//==========================================================
+// Student Number : S10267226
+// Student Name : Lovette Tew Yu Xin
+// Partner Name : Tan Sheng Zhe Zander
+//===========================================================
+
 namespace S10267226_PRG2Assignment
 {
     public abstract class Flight
@@ -27,7 +33,19 @@ namespace S10267226_PRG2Assignment
         }
 
         //Methods
-        public abstract double CalculateFees();
+        public virtual double CalculateFees()
+        {
+            double fees = 300.0; // Base fee for boarding gate
+            if (Origin == "SIN")
+            {
+                fees += 500.0;
+            }
+            if (Destination == "SIN")
+            {
+                fees += 800.0;
+            }
+            return fees;
+        }
 
         public override string ToString()
         {

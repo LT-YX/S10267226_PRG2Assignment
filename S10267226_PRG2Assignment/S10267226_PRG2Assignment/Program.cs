@@ -5,6 +5,9 @@
 //===========================================================
 
 
+using System.Collections.Specialized;
+using System.Diagnostics.Metrics;
+using System.Runtime;
 using S10267226_PRG2Assignment;
 
 //
@@ -13,10 +16,24 @@ Dictionary<string, Airline> airlineDictionary = new Dictionary<string, Airline>(
 Dictionary<string, BoardingGate> boardingGateDictionary = new Dictionary<string, BoardingGate>();
 
 // Main Program
+
+Console.WriteLine("Loading Airlines...");
 ReadAirlines();
+Console.WriteLine("Loading Boarding Gates...");
 ReadBoardingGates();
+Console.WriteLine("Loading Flights...");
 LoadFlights();
-DisplayFlightSchedule();
+Console.WriteLine();
+
+string option = "1";
+// Loop
+while (option != "0")
+{
+    DisplayMenu();
+    Console.WriteLine("Please select your option: ");
+    option = Console.ReadLine();
+}
+
 
 // Methods
 
@@ -40,6 +57,7 @@ void DisplayMenu()
 
 void ReadAirlines()
 {
+    int counter = 0;
     try
     {
         using (StreamReader sr = new StreamReader("airlines.csv"))
@@ -50,6 +68,7 @@ void ReadAirlines()
                 string[] information = s.Split(",");
                 Airline a = new Airline(information[0], information[1]);
                 airlineDictionary.Add(information[1], a);
+                counter += 1;
             }
         }
     }
@@ -57,10 +76,12 @@ void ReadAirlines()
     {
         Console.WriteLine($"Error reading airlines file: {ex.Message}");
     }
+    Console.WriteLine($"{counter} Airlines Loaded!");
 }
 
 void ReadBoardingGates()
 {
+    int counter = 0;    
     try
     {
         using (StreamReader sr = new StreamReader("boardinggates.csv"))
@@ -69,8 +90,9 @@ void ReadBoardingGates()
             while ((s = sr.ReadLine()) != null)
             {
                 string[] information = s.Split(",");
-                BoardingGate bg = new BoardingGate(information[0], Convert.ToBoolean(information[1]), Convert.ToBoolean(information[2]), Convert.ToBoolean(information[3]));
+                BoardingGate bg = new BoardingGate(information[0], Convert.ToBoolean(information[1]), Convert.ToBoolean(information[2]), Convert.ToBoolean(information[3]),null);
                 boardingGateDictionary.Add(information[0], bg);
+                counter += 1;
             }
         }
     }
@@ -79,45 +101,56 @@ void ReadBoardingGates()
     {
         Console.WriteLine($"Error reading boarding gates file: {ex.Message}");
     }
+    Console.WriteLine($"{counter} Boarding Gates Loaded!");
 }
 
 // Feature 2
 
 void LoadFlights()
 {
-    using (StreamReader sr = new StreamReader("flights.csv"))
+    int counter = 0;
+    try
     {
-        string s = sr.ReadLine(); // Reads header and ignores it
-        while ((s = sr.ReadLine()) != null)
+        using (StreamReader sr = new StreamReader("flights.csv"))
         {
-            string[] information = s.Split(",");
-            if (information[4] == "")
+            string s = sr.ReadLine(); // Reads header and ignores it
+            while ((s = sr.ReadLine()) != null)
             {
-                NORMFlight nf = new NORMFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4]); // NormFlight
-                flightDictionary.Add(information[0], nf);
-            }
-            else
-            {
-                if (information[4] == "LWTT")
+                string[] information = s.Split(",");
+                if (information[4] == "")
                 {
-                    LWTTFlight lf = new LWTTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4],500.00); // LWTTFlight
-                    flightDictionary.Add(information[0], lf);
-
-                }
-                else if (information[4] == "CFFT")
-                {
-                    CFFTFlight cf = new CFFTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 150.00); // CFFTFlight
-                    flightDictionary.Add(information[0], cf);
+                    NORMFlight nf = new NORMFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4]); // NormFlight
+                    flightDictionary.Add(information[0], nf);
                 }
                 else
                 {
-                    DDJBFlight df = new DDJBFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 300.00); // DJJBFlight
-                    flightDictionary.Add(information[0], df);
+                    if (information[4] == "LWTT")
+                    {
+                        LWTTFlight lf = new LWTTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 500.00); // LWTTFlight
+                        flightDictionary.Add(information[0], lf);
 
+                    }
+                    else if (information[4] == "CFFT")
+                    {
+                        CFFTFlight cf = new CFFTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 150.00); // CFFTFlight
+                        flightDictionary.Add(information[0], cf);
+                    }
+                    else
+                    {
+                        DDJBFlight df = new DDJBFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 300.00); // DJJBFlight
+                        flightDictionary.Add(information[0], df);
+
+                    }
                 }
+                counter += 1;
             }
         }
     }
+    catch (Exception ex)
+    { 
+        Console.WriteLine($"Error reading flights.csv file: {ex.Message}");
+    }
+    Console.WriteLine($"{counter} Flights Loaded!");
 }
 
 // Feature 3
@@ -129,7 +162,7 @@ void ListFlights()
     Console.WriteLine($"{"Flight Number",-15} {"Airline Name",-21} {"Origin",-21} {"Destination",-19} {"Expected Departure/Arrival Time"}");
     foreach (Flight f in flightDictionary.Values)
     {
-        Console.WriteLine($"{f.FlightNumber,-15} {"airline",-21} {f.Origin,-21} {f.Destination,-19} {f.ExpectedTime}");
+        Console.WriteLine($"{f.FlightNumber,-15} {airlineDictionary[f.FlightNumber[0..2]].Name,-21} {f.Origin,-21} {f.Destination,-19} {f.ExpectedTime}");
     }
 }
 
