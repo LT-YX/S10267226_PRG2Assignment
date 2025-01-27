@@ -37,7 +37,6 @@ while (option != "0")
 
 
 
-
 // Methods
 
 // Displays menu
