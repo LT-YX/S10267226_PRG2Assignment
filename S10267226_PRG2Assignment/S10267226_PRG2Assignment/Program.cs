@@ -13,8 +13,10 @@ Dictionary<string, Airline> airlineDictionary = new Dictionary<string, Airline>(
 Dictionary<string, BoardingGate> boardingGateDictionary = new Dictionary<string, BoardingGate>();
 
 // Main Program
+ReadAirlines();
+ReadBoardingGates();
 LoadFlights();
-ListFlights();
+DisplayFlightSchedule();
 
 // Methods
 
@@ -128,5 +130,68 @@ void ListFlights()
     foreach (Flight f in flightDictionary.Values)
     {
         Console.WriteLine($"{f.FlightNumber,-15} {"airline",-21} {f.Origin,-21} {f.Destination,-19} {f.ExpectedTime}");
+    }
+}
+
+// Feature 4
+void ListBoardingGates()
+{
+    Console.WriteLine("=============================================\n" +
+                    "List of Boarding Gates for Changi Airport Terminal 5\n" +
+                    "=============================================");
+
+    Console.WriteLine($"{"Gate Name",-15} {"Supports CFFT",-21} {"Supports DDJB",-21} {"Supports LWTT"}");
+    foreach (BoardingGate bg in boardingGateDictionary.Values)
+    {
+        Console.WriteLine($"{bg.GateName,-15} {bg.SupportsCFFT,-21} {bg.SupportsDDJB,-21} {bg.SupportsLWTT}");
+    }
+}
+
+// Feature 5
+
+// Feature 6
+
+// Feature 7
+
+void DisplayFlightSchedule()
+{
+    try
+    {
+        //Listing of Airlines
+        /*Console.WriteLine("=============================================\n" +
+                        "List of Flights for Changi Airport Terminal 5\n" +
+                        "=============================================");
+        Console.WriteLine($"{"Name",-15} {"Code",-2}");
+        */
+
+        foreach (Airline f in airlineDictionary.Values)
+        {
+            Console.WriteLine($"{f.Name,-20} {f.Code,-2}");
+        }
+
+        Console.Write("Pls enter the airline Code: ");
+        string airlineCode = Console.ReadLine();
+
+        Console.WriteLine();
+
+        if (airlineDictionary.ContainsKey(airlineCode))
+        {
+            Console.WriteLine($"{"Flight Number",-15} {"Airline Name",-21} {"Origin",-21} {"Destination",-19}");
+            foreach(Flight f in airlineDictionary[airlineCode].Flights.Values)
+            {
+
+                Console.WriteLine($"{f.FlightNumber,-15} {f.Origin,-21} {f.Destination,-19}");
+            }
+        }
+
+        else
+        {
+            Console.WriteLine("Invalid Airline Code");
+        }
+    }
+
+    catch (Exception ex)
+    {
+        Console.WriteLine("Pls Enter Valid Input");
     }
 }
