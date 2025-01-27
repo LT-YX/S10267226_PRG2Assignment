@@ -32,6 +32,37 @@ while (option != "0")
     DisplayMenu();
     Console.WriteLine("Please select your option: ");
     option = Console.ReadLine();
+
+    switch(option)
+    {
+        case "1":
+
+            break;
+        case "2":
+
+            break;
+        case "3":
+
+            break;
+        case "4":
+
+            break;
+        case "5":
+
+            break;
+        case "6":
+
+            break;
+        case "7":
+   
+            break;
+        case "0":
+
+            break;
+        default:
+            Console.WriteLine("Invalid Option! Please try again.");
+            break;
+    }
 }
 
 
@@ -191,15 +222,14 @@ void DisplayFlightSchedule()
     try
     {
         //Listing of Airlines
-        /*Console.WriteLine("=============================================\n" +
+        Console.WriteLine("=============================================\n" +
                         "List of Flights for Changi Airport Terminal 5\n" +
                         "=============================================");
-        Console.WriteLine($"{"Name",-15} {"Code",-2}");
-        */
-
+        Console.WriteLine($"{"Name",-20} {"Code",-10}");
+        
         foreach (Airline f in airlineDictionary.Values)
         {
-            Console.WriteLine($"{f.Name,-20} {f.Code,-2}");
+            Console.WriteLine($"{f.Name,-20} {f.Code,-10}");
         }
 
         Console.Write("Pls enter the airline Code: ");
