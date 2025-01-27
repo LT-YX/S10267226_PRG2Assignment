@@ -25,7 +25,6 @@ namespace S10267226_PRG2Assignment
             SupportsCFFT = supportsCFFT;
             SupportsDDJB = supportsDDJB;
             SupportsLWTT = supportsLWTT;
-            Flight = flight;
         }
 
         //Methods

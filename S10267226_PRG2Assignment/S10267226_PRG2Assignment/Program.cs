@@ -16,7 +16,6 @@ Dictionary<string, BoardingGate> boardingGateDictionary = new Dictionary<string,
 LoadFlights();
 ListFlights();
 
-
 // Methods
 
 // Displays menu
