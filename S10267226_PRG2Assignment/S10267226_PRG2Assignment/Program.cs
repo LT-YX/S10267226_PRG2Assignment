@@ -56,12 +56,13 @@ while (option != "0")
             Console.WriteLine();
             break;
 
-        case "5": // Feature 7
+        case "5": // Feature 7 - Complete
             DisplayFlightSchedule();
             Console.WriteLine();
             break;
-        case "6": // Feature 8
+        case "6": // Feature 8 - Complete
             ModifyFlightDetails();
+            Console.WriteLine();
             break;
 
         case "7": // Feature 9
@@ -841,12 +842,84 @@ void ModifyFlightDetails()
         // Action 2
         else if (User_Action == "2")
         {
+
             Console.WriteLine("");
             Console.WriteLine("You have chosen option 2");
-            Console.WriteLine("choose an existing Flight to delete");
+            Console.WriteLine("choose an existing Flight to delete (Number)");
             string ChosenFlight2 = Console.ReadLine();
 
+            // Check for Invalid Input
 
+            foreach (Flight A in AirlineFlightDictionary.Values)
+            {
+                string[] airlineCode2 = A.FlightNumber.Split(' ');
+                if (airlineCode2[1] == ChosenFlight2)
+                    break;
+
+                else
+                {
+                    throw new ArgumentException("Invalid Flight");
+                }
+            }
+
+            foreach (Flight A in AirlineFlightDictionary.Values)
+            {
+                string[] airlineCode2 = A.FlightNumber.Split(' ');
+                if (airlineCode2[1] == ChosenFlight2)
+                {
+                    //Basic Information except the Flight Number itself
+                    //(i.e. Origin, Destination, and Expected Departure/Arrival Time),
+                    //or Status, Special Request Code and update the Flight object’s information accordingly
+
+                    Console.WriteLine();
+
+                    Console.WriteLine($"{"Flight Number",-15}" +
+                        $"{"Airline Name",-25}" +
+                        $"{"Origin",-20}" +
+                        $"{"Destination",-20}" +
+                        $"{"Expected Time",-25}" +
+                        $"{"Status",-5}");
+
+                    Console.WriteLine($"{A.FlightNumber,-15}" +
+                        $"{airlineDictionary[airlineCode2[0]].Name,-25}" +
+                        $"{A.Origin,-20}" +
+                        $"{A.Destination,-20}" +
+                        $"{A.ExpectedTime,-25}" +
+                        $"{A.Status,-20}");
+                }
+            }
+
+            while (true)
+            {
+                Console.WriteLine("Are you sure you want to delete this flight? (Y/N)");
+                string User_Action3 = Console.ReadLine();
+
+
+                if (User_Action3 == "Y")
+                {
+                    foreach (Flight A in AirlineFlightDictionary.Values)
+                    {
+                        string[] airlineCode2 = A.FlightNumber.Split(' ');
+                        if (airlineCode2[1] == ChosenFlight2)
+                        {
+                            flightDictionary.Remove(A.FlightNumber);
+                            Console.WriteLine("Flight has been deleted");
+                            break;
+                        }
+                    }
+                    break;
+                }
+
+                else if (User_Action3 == "N")
+                {
+                    break;
+                }
+
+                else
+                {
+                    Console.WriteLine("Invalid Action");
+                }
+            }
         }
 
         // Error
