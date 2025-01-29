@@ -235,7 +235,7 @@ void ListBoardingGates()
 // Feature 5
 
 // Validation for Empty inputs
-void validateEmpty(string? toBeValidated, string errorMessage)
+void ValidateEmpty(string? toBeValidated, string errorMessage)
 {
     if (string.IsNullOrWhiteSpace(toBeValidated))
     {
@@ -274,7 +274,7 @@ void assignBoardingGate()
                 string flightNumber = Console.ReadLine().ToUpper();
 
                 // Check if empty input
-                validateEmpty(flightNumber, text);
+                ValidateEmpty(flightNumber, text);
 
 
 
@@ -302,7 +302,7 @@ void assignBoardingGate()
                     boardingGate = Console.ReadLine().ToUpper();
 
                     // Check if empty input
-                    validateEmpty(boardingGate, text);
+                    ValidateEmpty(boardingGate, text);
 
                     supportCFFT = boardingGateDictionary[boardingGate].SupportsCFFT;
                     supportDDJB = boardingGateDictionary[boardingGate].SupportsDDJB;
@@ -410,7 +410,7 @@ string ValidateOriginDestination(string location, string text)
             location = Console.ReadLine().Trim();
 
             // Check if origin/destination is empty
-            validateEmpty(location, text);
+            ValidateEmpty(location, text);
 
             // Check if origin/destination contains both city name and airport code
             string[] locationParts = location.Split(" ");
@@ -466,7 +466,7 @@ DateTime ValidateExpectedTime(string expectedTime)
             expectedTime = Console.ReadLine();
 
             // Checks if time is empty
-            validateEmpty(expectedTime, "Expected Departure/Arrival Time");
+            ValidateEmpty(expectedTime, "Expected Departure/Arrival Time");
 
             string[] splittedTime = expectedTime.Split(' ');
 
@@ -548,7 +548,7 @@ void CreateNewFlight()
                 flightNumber = Console.ReadLine().Trim(); // .Trim() removes whitespaces
 
                 // Checks if flight number is empty
-                validateEmpty(flightNumber, "Flight Number");
+                ValidateEmpty(flightNumber, "Flight Number");
 
                 string[] splittedFlightNumber = flightNumber.Split(' ');
 
@@ -640,7 +640,7 @@ void CreateNewFlight()
                 specialRequestCode = Console.ReadLine().Trim();
 
                 // Checks if request code is empty
-                validateEmpty(specialRequestCode, "Special Request Code");
+                ValidateEmpty(specialRequestCode, "Special Request Code");
 
                 specialRequestCode = specialRequestCode.ToUpper();
 
