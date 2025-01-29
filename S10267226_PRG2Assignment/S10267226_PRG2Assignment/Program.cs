@@ -17,6 +17,8 @@ Dictionary<string, Flight> flightDictionary = new Dictionary<string, Flight>();
 Dictionary<string, Airline> airlineDictionary = new Dictionary<string, Airline>();
 Dictionary<string, BoardingGate> boardingGateDictionary = new Dictionary<string, BoardingGate>();
 
+Dictionary<string, string> specialCodeDictionary = new Dictionary<string, string>();  // Used for feature 5
+
 // Main Program
 
 Console.WriteLine("Loading Airlines...");
@@ -48,7 +50,7 @@ while (option != "0")
             break;
 
         case "3": // Feature 5
-
+            assignBoardingGate();
             break;
 
         case "4": // Feature 6 - Complete
@@ -163,26 +165,30 @@ void LoadFlights()
                 string[] information = s.Split(",");
                 if (information[4] == "")
                 {
-                    NORMFlight nf = new NORMFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4]); // NormFlight
+                    NORMFlight nf = new NORMFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3])); // NormFlight
                     flightDictionary.Add(information[0], nf);
+                    specialCodeDictionary.Add(information[0], information[4]);
                 }
                 else
                 {
                     if (information[4] == "LWTT")
                     {
-                        LWTTFlight lf = new LWTTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 500.00); // LWTTFlight
+                        LWTTFlight lf = new LWTTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3])); // LWTTFlight
                         flightDictionary.Add(information[0], lf);
+                        specialCodeDictionary.Add(information[0], information[4]);
 
                     }
                     else if (information[4] == "CFFT")
                     {
-                        CFFTFlight cf = new CFFTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 150.00); // CFFTFlight
+                        CFFTFlight cf = new CFFTFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3])); // CFFTFlight
                         flightDictionary.Add(information[0], cf);
+                        specialCodeDictionary.Add(information[0], information[4]);
                     }
                     else
                     {
-                        DDJBFlight df = new DDJBFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3]), information[4], 300.00); // DJJBFlight
+                        DDJBFlight df = new DDJBFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3])); // DJJBFlight
                         flightDictionary.Add(information[0], df);
+                        specialCodeDictionary.Add(information[0], information[4]);
 
                     }
                 }
@@ -225,7 +231,20 @@ void ListBoardingGates()
 }
 
 // Feature 5
-
+void assignBoardingGate()
+{
+    Console.WriteLine("=============================================\n" +
+        "Assign a Boarding Gate to a Flight\n" +
+        "=============================================");
+    Console.Write("Enter Flight Number: ");
+    string flightNumber = Console.ReadLine();
+    Console.WriteLine($"Flight Number: {flightDictionary[flightNumber].FlightNumber}\n" +
+        $"Origin: {flightDictionary[flightNumber].Origin}\n" +
+        $"Destination: {flightDictionary[flightNumber].Destination}\n" +
+        $"Expected Time: {flightDictionary[flightNumber].ExpectedTime}\n" +
+        $"Special Request Code: {specialCodeDictionary[flightNumber]}");
+   
+}
 
 
 // Feature 6
@@ -277,7 +296,8 @@ string validateOriginDestination(string location, string text)
             }
 
             // Formatting of origin
-            location = char.ToUpper(cityName[0]) + cityName.Substring(1) + " " + airportCode.ToUpper();
+            location = char.ToUpper(cityName[0]) + cityName.Substring(1) + " " + airportCode.ToUpper(); 
+            // Substring(1) means index 1 and onwards
 
             Console.WriteLine($"{text} entered: {location}");
             break;
@@ -506,22 +526,23 @@ void CreateNewFlight()
         Flight newflight;
         if (specialRequestCode == "NONE")
         {
-            newflight = new NORMFlight(flightNumber, origin, destination, validatedTime, "On Time");
+            newflight = new NORMFlight(flightNumber, origin, destination, validatedTime);
             specialRequestCode = "";
         }
         else
         {
             if (specialRequestCode == "CFFT")
             {
-                newflight = new CFFTFlight(flightNumber, origin, destination, validatedTime, "On Time", 150);
+                newflight = new CFFTFlight(flightNumber, origin, destination, validatedTime);
+                
             }
             else if (specialRequestCode == "DDJB")
             {
-                newflight = new DDJBFlight(flightNumber, origin, destination, validatedTime, "On Time", 300);
+                newflight = new DDJBFlight(flightNumber, origin, destination, validatedTime);
             }
             else
             {
-                newflight = new LWTTFlight(flightNumber, origin, destination, validatedTime, "On Time", 500);
+                newflight = new LWTTFlight(flightNumber, origin, destination, validatedTime);
             }
             specialRequestCode += ",";
         }
@@ -530,7 +551,7 @@ void CreateNewFlight()
         flightDictionary.Add(flightNumber, newflight);
 
         // Adding Flight to flights.csv
-        using (StreamWriter sw = new StreamWriter("flights.csv"))
+        using (StreamWriter sw = new StreamWriter("flights.csv",true)) // true lets text be appeneded
         {
             sw.WriteLine($"{flightNumber},{origin},{destination},{expectedTime},{specialRequestCode}");
         }

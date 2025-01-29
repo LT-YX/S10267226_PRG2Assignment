@@ -18,15 +18,16 @@ namespace S10267226_PRG2Assignment
         public double RequestFee { get; set; }
 
         //Constructor
-        public CFFTFlight(string flightNumber, string origin, string destination, DateTime expectedTime, string status, double requestFee) : base(flightNumber, origin, destination, expectedTime, status)
+        public CFFTFlight(string flightNumber, string origin, string destination, DateTime expectedTime) : base(flightNumber, origin, destination, expectedTime)
         {
-            RequestFee = requestFee; // Fee is $150
+            // Status is inherited. Default set to On Time
+            RequestFee = 150.00; // CFFT fee is $150
         }
 
         public override double CalculateFees() // Promotions can be applied in program.cs with a method called applyPromotions()
         {
-            double fees = 300.0; // Base fee for boarding gate
-            fees += RequestFee;
+            double fees = 0; 
+            fees += RequestFee; // Fee is $150
             if (Origin == "SIN")
             {
                 fees += 500.0;

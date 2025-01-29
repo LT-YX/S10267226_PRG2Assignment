@@ -15,15 +15,15 @@ namespace S10267226_PRG2Assignment
     public class NORMFlight : Flight
     {
         //Constructor
-        public NORMFlight(string flightNumber, string origin, string destination, DateTime expectedTime, string status) : base(flightNumber, origin, destination, expectedTime, status)
+        public NORMFlight(string flightNumber, string origin, string destination, DateTime expectedTime) : base(flightNumber, origin, destination, expectedTime)
         {
-
+            // Status is inherited. Default set to On Time
         }
 
         //Methods
         public override double CalculateFees() // Promotions can be applied in program.cs with a method called applyPromotions()
         {
-            double fees = 300.0; // Base fee for boarding gate
+            double fees = 0; 
             if (Origin == "SIN")
             {
                 fees += 500.0;

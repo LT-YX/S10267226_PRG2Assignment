@@ -18,16 +18,17 @@ namespace S10267226_PRG2Assignment
         public double RequestFee { get; set; }
 
         //Constructor
-        public LWTTFlight(string flightNumber, string origin, string destination, DateTime expectedTime, string status, double requestFee) : base(flightNumber, origin, destination, expectedTime, status)
+        public LWTTFlight(string flightNumber, string origin, string destination, DateTime expectedTime) : base(flightNumber, origin, destination, expectedTime)
         {
-            RequestFee = requestFee;
+            // Status is inherited. Default set to On Time
+            RequestFee = 500.00; // LWTT fee is $500
         }
 
         //Methods
         public override double CalculateFees() // Promotions can be applied in program.cs with a method called applyPromotions()
         {
-            double fees = 300.0; // Base fee for boarding gate
-            fees += RequestFee; // $500
+            double fees = 0; // Base fee for boarding gate
+            fees += RequestFee; // LWTT fee is $500
             if (Origin == "SIN")
             {
                 fees += 500.0;

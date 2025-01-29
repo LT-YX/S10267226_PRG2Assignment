@@ -18,14 +18,15 @@ namespace S10267226_PRG2Assignment
         public double RequestFee { get; set; }
 
         //Constructor
-        public DDJBFlight(string flightNumber, string origin, string destination, DateTime expectedTime, string status, double requestFee) : base(flightNumber, origin, destination, expectedTime, status)
+        public DDJBFlight(string flightNumber, string origin, string destination, DateTime expectedTime) : base(flightNumber, origin, destination, expectedTime)
         {
-            RequestFee = requestFee;
+            // Status is inherited. Default set to On Time
+            RequestFee = 300.00; // DDJB Fee is $300
         }
 
         public override double CalculateFees() // Promotions can be applied in program.cs with a method called applyPromotions()
         {
-            double fees = 300.0; // Base fee for boarding gate
+            double fees = 0; 
             fees += RequestFee; // Fee is $300
             if (Origin == "SIN")
             {

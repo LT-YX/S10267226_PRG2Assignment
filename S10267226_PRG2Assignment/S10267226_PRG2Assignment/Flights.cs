@@ -22,20 +22,20 @@ namespace S10267226_PRG2Assignment
         public string Status { get; set; }
 
         //Constructor
-        public Flight(string flightNumber, string origin, string destination, DateTime expectedTime, string status)
+        public Flight(string flightNumber, string origin, string destination, DateTime expectedTime)
         {
             FlightNumber = flightNumber;
             Origin = origin;
             Destination = destination;
             ExpectedTime = expectedTime;
-            Status = status;
+            Status = "On Time"; // Default set to On Time
 
         }
 
         //Methods
         public virtual double CalculateFees()
         {
-            double fees = 300.0; // Base fee for boarding gate
+            double fees = 0;
             if (Origin == "SIN")
             {
                 fees += 500.0;
