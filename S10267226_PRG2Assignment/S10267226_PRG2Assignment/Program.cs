@@ -248,14 +248,14 @@ void assignBoardingGate()
 
 
 // Feature 6
-void createAirLineCodeList(List<string> airlineCodeList) // Ensures that when flights.csv is changed, the valid airline codes are 
+void CreateAirLineCodeList(List<string> airlineCodeList) // Ensures that when flights.csv is changed, the valid airline codes are 
 {
     foreach(var airline in airlineDictionary.Values)
     {
         airlineCodeList.Add(airline.Code);
     }
 }
-string validateOriginDestination(string location, string text)
+string ValidateOriginDestination(string location, string text)
 {
     string cityName;
     string airportCode;
@@ -315,6 +315,61 @@ string validateOriginDestination(string location, string text)
     }
     return location;
 }
+DateTime ValidateExpectedTime(string expectedTime)
+{
+    DateTime validatedTime;
+    while (true)
+    {
+        try
+        {
+            Console.Write("\nEnter expected Departure/Arrival time (dd/mm/yyyy hh:mm): ");
+            expectedTime = Console.ReadLine();
+
+            // Checks if time is empty
+            if (string.IsNullOrWhiteSpace(expectedTime))
+            {
+                throw new ArgumentException("Expected Departure/Arrival Time cannot be empty");
+            }
+
+            string[] splittedTime = expectedTime.Split(' ');
+
+            // Checks if time can be split into date and time to check for date and time portion
+            if (splittedTime.Length != 2)
+            {
+                throw new ArgumentException("Expecture Departure/Arrival Time is missing Date or Time portions");
+            }
+
+            // validate date and time portion
+            string date = splittedTime[0];
+            string time = splittedTime[1];
+
+            if (date.Any(char.IsLetter) || time.Any(char.IsLetter)) // Checks if letters are present in date & time
+            {
+                throw new ArgumentException("Expecture Departure/Arrival Time cannot contain letters");
+            }
+
+            validatedTime = Convert.ToDateTime(expectedTime);
+            Console.WriteLine($"Expected Departure/Arrival Time: {validatedTime}");
+            break;
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Expected Time entered is in the wrong format.");
+            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Unexpected error: " + ex.Message);
+            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
+        }
+    }
+    return validatedTime;
+}
 void CreateNewFlight()
 {
     string repeat = "Y";
@@ -331,7 +386,7 @@ void CreateNewFlight()
     string destination = "";
 
     // Expected Time
-    string expectedTime;
+    string expectedTime = "";
     DateTime validatedTime;
 
     // Special Request Code
@@ -340,7 +395,7 @@ void CreateNewFlight()
 
     // Validate Flight Number
     List<string> airlineCodeList = new();
-    createAirLineCodeList(airlineCodeList);
+    CreateAirLineCodeList(airlineCodeList);
     Console.Write("=============================================" +
         "\nCreating New Flight" +
         "\n=============================================");
@@ -420,8 +475,8 @@ void CreateNewFlight()
         {
             try
             {
-                origin = validateOriginDestination(origin, "Origin");
-                destination = validateOriginDestination(destination, "Destination");
+                origin = ValidateOriginDestination(origin, "Origin");
+                destination = ValidateOriginDestination(destination, "Destination");
                 if (destination == origin)
                 {
                     throw new ArgumentException();
@@ -439,56 +494,9 @@ void CreateNewFlight()
         }
 
         // Expectd Departure / Arrival Time
-        while (true)
-        {
-            try
-            {
-                Console.Write("\nEnter expected Departure/Arrival time (dd/mm/yyyy hh:mm): ");
-                expectedTime = Console.ReadLine();
 
-                // Checks if time is empty
-                if (string.IsNullOrWhiteSpace(expectedTime))
-                {
-                    throw new ArgumentException("Expected Departure/Arrival Time cannot be empty");
-                }
-
-                string[] splittedTime = expectedTime.Split(' ');
-
-                // Checks if time can be split into date and time to check for date and time portion
-                if (splittedTime.Length != 2)
-                {
-                    throw new ArgumentException("Expecture Departure/Arrival Time is missing Date or Time portions");
-                }
-
-                // validate date and time portion
-                string date = splittedTime[0];
-                string time = splittedTime[1];
-
-                if (date.Any(char.IsLetter) || time.Any(char.IsLetter)) // Checks if letters are present in date & time
-                {
-                    throw new ArgumentException("Expecture Departure/Arrival Time cannot contain letters");
-                }
-
-                validatedTime = Convert.ToDateTime(expectedTime);
-                Console.WriteLine($"Expected Departure/Arrival Time: {validatedTime}");
-                break;
-            }
-            catch (ArgumentException ex)
-            {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Expected Time entered is in the wrong format.");
-                Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Unexpected error: " + ex.Message);
-                Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
-            }
-        }
+        validatedTime = ValidateExpectedTime(expectedTime);
+        
         // Validate special request code
         while (true)
         {
@@ -760,13 +768,13 @@ void ModifyFlightDetails()
                         if (User_Action2 == "1")
                         {
                             // Reused Function from method 6
-                            A.Origin = validateOriginDestination(A.Origin, "Origin");
+                            A.Origin = ValidateOriginDestination(A.Origin, "Origin");
                         }
 
                         else if (User_Action2 == "2")
                         {
                             // Reused Function from method 6
-                            A.Destination = validateOriginDestination(A.Destination, "Destination");
+                            A.Destination = ValidateOriginDestination(A.Destination, "Destination");
                         }
 
                         else if (User_Action2 == "3")
