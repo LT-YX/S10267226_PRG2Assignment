@@ -37,32 +37,39 @@ while (option != "0")
 
     switch(option)
     {
-        case "1":
+        case "1": // Feature 3 - Complete
             ListFlights();
             Console.WriteLine();
             break;
-        case "2":
+
+        case "2": // Feature 4 - Complete
             ListBoardingGates();
             Console.WriteLine();
             break;
-        case "3":
+
+        case "3": // Feature 5
 
             break;
-        case "4":
+
+        case "4": // Feature 6 - Complete
             CreateNewFlight();
             Console.WriteLine();
             break;
-        case "5":
 
-            break;
-        case "6":
-
-            break;
-        case "7":
+        case "5": // Feature 7
             DisplayFlightSchedule();
             Console.WriteLine();
             break;
-        case "0":
+
+        case "6": // Feature 8
+
+            break;
+
+        case "7": // Feature 9
+            
+            break;
+
+        case "0": // Exit
 
             break;
         default:
@@ -219,8 +226,9 @@ void ListBoardingGates()
 
 // Feature 5
 
-// Feature 6
 
+
+// Feature 6
 void createAirLineCodeList(List<string> airlineCodeList) // Ensures that when flights.csv is changed, the valid airline codes are 
 {
     foreach(var airline in airlineDictionary.Values)
@@ -313,6 +321,9 @@ void CreateNewFlight()
     // Validate Flight Number
     List<string> airlineCodeList = new();
     createAirLineCodeList(airlineCodeList);
+    Console.Write("=============================================" +
+        "\nCreating New Flight" +
+        "\n=============================================");
 
     while (repeat == "Y")
     {
