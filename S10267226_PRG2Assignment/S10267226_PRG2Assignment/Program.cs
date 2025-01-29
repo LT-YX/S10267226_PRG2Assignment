@@ -60,9 +60,8 @@ while (option != "0")
             DisplayFlightSchedule();
             Console.WriteLine();
             break;
-
         case "6": // Feature 8
-
+            ModifyFlightDetails();
             break;
 
         case "7": // Feature 9
@@ -565,15 +564,17 @@ void DisplayFlightSchedule()
         }
         Console.WriteLine();
 
+
+        //User Selection of Airline
         Console.Write("Pls enter the airline Code: ");
         string airlineCode = Console.ReadLine();
 
-        Console.WriteLine();
+
 
         if (airlineDictionary.ContainsKey(airlineCode))
         {
             Console.WriteLine($"{"Flight Number",-15} {"Origin",-21} {"Destination",-19}");
-            foreach(Flight f in flightDictionary.Values)
+            foreach (Flight f in flightDictionary.Values)
             {
                 string[] airlineCode2 = f.FlightNumber.Split(' ');
                 if (airlineCode2[0] == airlineCode)
@@ -581,45 +582,287 @@ void DisplayFlightSchedule()
                     Console.WriteLine($"{f.FlightNumber,-15} {f.Origin,-21} {f.Destination,-19}");
                 }
             }
+        }
 
-            Console.WriteLine();
-            Console.Write("Pls enter the flight number: ");
-            string selectedFlightNumber = Console.ReadLine();
+        else
+        {
+            throw new ArgumentException("Invalid Airline Code");
+        }
 
-            foreach (Flight A in flightDictionary.Values)
+        //User Selection of Flight Number
+
+        Console.WriteLine();
+        Console.Write("Pls enter the flight number: ");
+        string selectedFlightNumber = Console.ReadLine();
+
+        foreach (Flight A in flightDictionary.Values) // Searching and Displaying the flight details
+        {
+            string[] airlineCode2 = A.FlightNumber.Split(' ');
+            if (airlineCode2[0] == airlineCode)
             {
-                string[] airlineCode2 = A.FlightNumber.Split(' ');
+                if (airlineCode2[1] == selectedFlightNumber)
+                {
+                    // Flight Number, Airline Name, Origin, Destination, and Expected Departure/Arrival Time, Special Request Code
+
+                    Console.WriteLine();
+
+                    Console.WriteLine($"{"Flight Number",-15}" +
+                        $"{"Airline Name",-25}" +
+                        $"{"Origin",-20}" +
+                        $"{"Destination",-20}" +
+                        $"{"Expected Time",-25}" +
+                        $"{"Status",-5}");
+
+                    Console.WriteLine($"{A.FlightNumber,-15}" +
+                        $"{airlineDictionary[airlineCode2[0]].Name,-25}" +
+                        $"{A.Origin,-20}" +
+                        $"{A.Destination,-20}" +
+                        $"{A.ExpectedTime,-25}" +
+                        $"{A.Status,-20}");
+                    return;
+                }
+            }
+        }
+
+        throw new ArgumentException("Invalid Flight Number");
+
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"{ex}");
+    }
+}
+
+
+
+
+
+// Feature 8
+void ModifyFlightDetails()
+{
+    try
+    {
+        //Listing of Airlines
+        Console.WriteLine("=============================================\n" +
+                        "List of Flights for Changi Airport Terminal 5\n" +
+                        "=============================================");
+        Console.WriteLine($"{"Name",-20} {"Code",-10}");
+
+        foreach (Airline f in airlineDictionary.Values)
+        {
+            Console.WriteLine($"{f.Name,-20} {f.Code,-10}");
+        }
+        Console.WriteLine();
+
+
+        //User Selection of Airline
+        Console.Write("Pls enter the airline Code: ");
+        string airlineCode = Console.ReadLine();
+
+        Dictionary<string, Flight> AirlineFlightDictionary = new Dictionary<string, Flight>();
+
+        if (airlineDictionary.ContainsKey(airlineCode))
+        {
+            Console.WriteLine($"{"Flight Number",-15} {"Origin",-21} {"Destination",-19}");
+            foreach (Flight f in flightDictionary.Values)
+            {
+                string[] airlineCode2 = f.FlightNumber.Split(' ');
                 if (airlineCode2[0] == airlineCode)
                 {
-                    if (airlineCode2[1] == selectedFlightNumber)
-                    {
-                        Console.WriteLine($"{"Flight Number",-15} {"Origin",-21} {"Destination",-23} {"Expected Time",-23} {"Status",-23} {"Fees",-23}");
-                        Console.WriteLine(
-                            $"{A.FlightNumber,-15} " +
-                            $"{A.Origin,-21}" +
-                            $"{A.Destination,-23}" +
-                            $"{A.ExpectedTime,-23} " +
-                            $"{A.Status,-23} " +
-                            $"{A.CalculateFees(),-23}"
-                            );
-                        break;
-                    }
-
+                    Console.WriteLine($"{f.FlightNumber,-15} {f.Origin,-21} {f.Destination,-19}");
+                    AirlineFlightDictionary.Add(f.FlightNumber, f);
                 }
             }
         }
 
         else
         {
-            Console.WriteLine("Invalid Airline Code");
+            throw new ArgumentException("Invalid Airline Code");
         }
+
+
+
+
+
+        //User Action Selection
+        Console.WriteLine("");
+        Console.WriteLine("[1] choose an existing Flight to modify");
+        Console.WriteLine("[2] choose an existing Flight to delete");
+        Console.WriteLine("Pls enter an option");
+        string User_Action = Console.ReadLine();
+
+        // Action 1
+        if (User_Action == "1")
+        {
+            Console.WriteLine("");
+            Console.WriteLine("You have chosen option 1");
+            Console.WriteLine("choose an existing Flight to modify (Number)");
+            string ChosenFlight = Console.ReadLine();
+
+            foreach (Flight A in AirlineFlightDictionary.Values)
+            {
+                string[] airlineCode2 = A.FlightNumber.Split(' ');
+                if (airlineCode2[1] == ChosenFlight)
+                {
+                    //Basic Information except the Flight Number itself
+                    //(i.e. Origin, Destination, and Expected Departure/Arrival Time),
+                    //or Status, Special Request Code and update the Flight object’s information accordingly
+
+                    Console.WriteLine();
+
+                    Console.WriteLine($"{"Flight Number",-15}" +
+                        $"{"Airline Name",-25}" +
+                        $"{"Origin",-20}" +
+                        $"{"Destination",-20}" +
+                        $"{"Expected Time",-25}" +
+                        $"{"Status",-5}");
+
+                    Console.WriteLine($"{A.FlightNumber,-15}" +
+                        $"{airlineDictionary[airlineCode2[0]].Name,-25}" +
+                        $"{A.Origin,-20}" +
+                        $"{A.Destination,-20}" +
+                        $"{A.ExpectedTime,-25}" +
+                        $"{A.Status,-20}");
+
+                    while (true)
+                    {
+                        Console.WriteLine("What would you like to modify?");
+                        Console.WriteLine("[1] Origin");
+                        Console.WriteLine("[2] Destination");
+                        Console.WriteLine("[3] Expected Time");
+                        Console.WriteLine("[4] Status");
+                        Console.WriteLine("[5] Exit");
+                        Console.WriteLine("Pls enter an option");
+                        string User_Action2 = Console.ReadLine();
+
+                        if (User_Action2 == "1")
+                        {
+                            // Reused Function from method 6
+                            A.Origin = validateOriginDestination(A.Origin, "Origin");
+                        }
+
+                        else if (User_Action2 == "2")
+                        {
+                            // Reused Function from method 6
+                            A.Destination = validateOriginDestination(A.Destination, "Destination");
+                        }
+
+                        else if (User_Action2 == "3")
+                        {
+                            while (true)
+                            {
+                                try
+                                {
+                                    Console.Write("\nEnter expected Departure/Arrival time (dd/mm/yyyy hh:mm): ");
+                                    string expectedTime = Console.ReadLine();
+
+                                    // Checks if time is empty
+                                    if (string.IsNullOrWhiteSpace(expectedTime))
+                                    {
+                                        throw new ArgumentException("Expected Departure/Arrival Time cannot be empty");
+                                    }
+
+                                    string[] splittedTime = expectedTime.Split(' ');
+
+                                    // Checks if time can be split into date and time to check for date and time portion
+                                    if (splittedTime.Length != 2)
+                                    {
+                                        throw new ArgumentException("Expecture Departure/Arrival Time is missing Date or Time portions");
+                                    }
+
+                                    // validate date and time portion
+                                    string date = splittedTime[0];
+                                    string time = splittedTime[1];
+
+                                    if (date.Any(char.IsLetter) || time.Any(char.IsLetter)) // Checks if letters are present in date & time
+                                    {
+                                        throw new ArgumentException("Expecture Departure/Arrival Time cannot contain letters");
+                                    }
+
+                                    A.ExpectedTime = Convert.ToDateTime(expectedTime);
+                                    Console.WriteLine($"Expected Departure/Arrival Time: {A.ExpectedTime}");
+                                    break;
+                                }
+                                catch (ArgumentException ex)
+                                {
+                                    Console.WriteLine(ex.Message);
+                                    Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("Expected Time entered is in the wrong format.");
+                                    Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
+                                }
+                            }
+                        }
+
+                        else if (User_Action2 == "4")
+                        {
+                            while(true)
+                            {
+                                Console.WriteLine("Possible Statuses CFFT, DDJB, LWTTF, NORM (Will Return Null)");
+                                Console.Write("Enter Status: ");
+                                String New_Status = Console.ReadLine();
+
+                                if (New_Status == "CFFT" || New_Status == "DDJB" || New_Status == "LWTTF")
+                                {
+                                    A.Status = Console.ReadLine();
+                                    break;
+                                }
+
+                                else if (New_Status == "NORM")
+                                {
+                                    A.Status = null;
+                                    break;
+                                }
+
+                                else
+                                {
+                                    Console.WriteLine("Invalid Status");
+                                }
+                            }
+                        }
+
+                        else if (User_Action2 == "5")
+                        {
+                            break;
+                        }
+
+                        else
+                        {
+                            throw new ArgumentException("Invalid Action");
+                        }
+                    }
+                }
+            }
+        }
+
+
+        // Action 2
+        else if (User_Action == "2")
+        {
+            Console.WriteLine("");
+            Console.WriteLine("You have chosen option 2");
+            Console.WriteLine("choose an existing Flight to delete");
+            string ChosenFlight2 = Console.ReadLine();
+
+
+        }
+
+        // Error
+        else
+        {
+            throw new ArgumentException("Invalid Action");
+        }
+
+    
+
     }
 
-    catch
+    catch (Exception ex)
     {
-        Console.WriteLine("Pls Enter Valid Input");
+        Console.WriteLine($"{ex}");
     }
 }
-// Feature 8
 
 // Feature 9
