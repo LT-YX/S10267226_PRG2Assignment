@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment.csproj",
+      "projectUniqueName": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment.csproj",
       "projectName": "S10267226_PRG2Assignment",
-      "projectPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment.csproj",
+      "projectPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment.csproj",
       "packagesPath": "C:\\Users\\lovet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\PRG02_Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\obj\\",
+      "outputPath": "C:\\Users\\lovet\\OneDrive\\Documents\\GitHub\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\S10267226_PRG2Assignment\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lovet\\AppData\\Roaming\\NuGet\\NuGet.Config",
