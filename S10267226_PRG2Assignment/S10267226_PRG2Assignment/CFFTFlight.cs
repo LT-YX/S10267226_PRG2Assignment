@@ -20,7 +20,7 @@ namespace S10267226_PRG2Assignment
         //Constructor
         public CFFTFlight(string flightNumber, string origin, string destination, DateTime expectedTime) : base(flightNumber, origin, destination, expectedTime)
         {
-            // Status is inherited. Default set to On Time
+            // Status is inherited. Default set to Scheduled
             RequestFee = 150.00; // CFFT fee is $150
         }
 

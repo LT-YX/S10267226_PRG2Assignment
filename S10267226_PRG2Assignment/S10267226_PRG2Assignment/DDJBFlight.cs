@@ -20,7 +20,7 @@ namespace S10267226_PRG2Assignment
         //Constructor
         public DDJBFlight(string flightNumber, string origin, string destination, DateTime expectedTime) : base(flightNumber, origin, destination, expectedTime)
         {
-            // Status is inherited. Default set to On Time
+            // Status is inherited. Default set to Scheduled 
             RequestFee = 300.00; // DDJB Fee is $300
         }
 

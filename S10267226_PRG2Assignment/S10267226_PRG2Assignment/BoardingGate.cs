@@ -36,8 +36,10 @@ namespace S10267226_PRG2Assignment
         //Methods
         public double CalculateFees()
         {
-            double basefee = 300;
-            return basefee;
+            double basefee = 300; // base fee for boarding gates
+            double flightFee = Flight.CalculateFees();
+            double totalFee = basefee + flightFee;
+            return totalFee;
         }
 
         public override string ToString()

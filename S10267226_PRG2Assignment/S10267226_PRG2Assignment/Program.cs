@@ -74,7 +74,7 @@ while (option != "0")
             break;
 
         case "7": // Feature 9
-            
+            DisplayFlightsChronologicalOrder();
             break;
 
         case "0": // Exit
@@ -318,7 +318,7 @@ void LoadFlights()
                     NORMFlight nf = new NORMFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3])); // NormFlight
                     flightDictionary.Add(information[0], nf);
                     // stores the special request code and matches it to the flight since flight does not store special request code
-                    specialCodeDictionary.Add(information[0], information[4]); 
+                    specialCodeDictionary.Add(information[0], "None"); 
                 }
                 else
                 {
@@ -422,14 +422,8 @@ void assignBoardingGate()
                 selectedOrigin = flightDictionary[flightNumber].Origin;
                 selectedDestination = flightDictionary[flightNumber].Destination;
                 selectedExpectedTime = flightDictionary[flightNumber].ExpectedTime;
-                if (specialCodeDictionary.ContainsKey(flightNumber))
-                {
-                    selectedSpecialCode = specialCodeDictionary[flightNumber];
-                }
-                else
-                {
-                    selectedSpecialCode = "None";
-                }
+                selectedSpecialCode = specialCodeDictionary[flightNumber];
+                
                 option = "boarding gate";
                 text = "Boarding Gate";
             }
@@ -677,6 +671,12 @@ void CreateNewFlight()
                 // Check if special request code exists
                 ValidatePresence(requestCodeList, specialRequestCode, "Invalid Special Request Code entered.");
                 
+                // Formatting for None
+                if (specialRequestCode == "NONE")
+                {
+                    specialRequestCode = "None";
+                }
+
                 Console.WriteLine($"Special Request Code entered: {specialRequestCode}");
                 break;
             }
@@ -811,7 +811,7 @@ void DisplayFlightSchedule()
 
         //User Selection of Airline
         Console.Write("Enter Airline Code: ");
-        string airlineCode = Console.ReadLine();
+        string airlineCode = Console.ReadLine().Trim();
 
         DisplayAirlineFlights(airlineCode);
         
@@ -819,7 +819,7 @@ void DisplayFlightSchedule()
 
         Console.WriteLine();
         Console.Write("Pls enter the flight number: ");
-        string selectedFlightNumber = Console.ReadLine();
+        string selectedFlightNumber = Console.ReadLine().Trim();
 
 
         foreach (Flight flight in flightDictionary.Values) // Searching and Displaying the flight details
@@ -1026,9 +1026,9 @@ void ModifyFlightDetails()
 
                                     else if (New_Status == "NONE")
                                     {
-                                        specialCodeDictionary[flight.FlightNumber] = "NONE";
-                                        Console.WriteLine("Special request code set to "+ New_Status);
+                                        specialCodeDictionary.Add(flight.FlightNumber, "None");
                                         break;
+                                 
                                     }
 
                                     else
@@ -1206,3 +1206,33 @@ void ModifyFlightDetails()
 }
 
 // Feature 9
+// Method to create flight list. Flight list will need to be created everytime since new flights can be added
+// Store flight objects in a list since dictionaries can't be sorted
+List<Flight> CreateFlightList()
+{
+    List<Flight> flightList = new();
+    foreach (Flight f in flightDictionary.Values)
+    {
+        flightList.Add(f);
+    }
+    return flightList;
+}
+
+void DisplayFlightsChronologicalOrder()
+{
+    List<Flight> flightList = CreateFlightList();
+
+    // Sort Flight List by Expected Time
+    flightList.Sort();
+
+    // Displaying information
+    Console.WriteLine($"{"Flight Number",-13}   {"Airline Name",-20}   {"Origin",-24}   {"Destination",-24}   {"Departure/Arrival Time",-22}   {"Status",-10}   {"Special Request Code",-21}   {"Boarding Gate"}");
+    foreach (Flight f in flightList)
+    {
+        string airlineCode = f.FlightNumber[0..2];
+        string airlineName = airlineDictionary[airlineCode].Name;
+        Console.WriteLine($"{f.FlightNumber,-13}   {airlineName,-20}   {f.Origin,-24}   {f.Destination,-24}   {f.ExpectedTime,-22}   {f.Status,-10}   {specialCodeDictionary[f.FlightNumber],-21}   {"Boarding Gate"}");
+        
+    }
+
+}
