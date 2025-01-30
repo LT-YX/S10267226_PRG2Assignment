@@ -941,11 +941,11 @@ void ModifyFlightDetails()
                         if (User_Action2 == "1")
                         {
                             // Reused Function from method 6
-                            A.Origin = validateOriginDestination(A.Origin, "Origin");
+                            A.Origin = ValidateOriginDestination(A.Origin, "Origin");
                             // Reused Function from method 6
 
-                            A.Destination = validateOriginDestination(A.Destination, "Destination");
-                        }
+                            A.Destination = ValidateOriginDestination(A.Destination, "Destination");
+           
 
 
                             // Modify Time
