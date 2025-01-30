@@ -19,7 +19,7 @@ Dictionary<string, Flight> flightDictionary = new Dictionary<string, Flight>();
 Dictionary<string, Airline> airlineDictionary = new Dictionary<string, Airline>();
 Dictionary<string, BoardingGate> boardingGateDictionary = new Dictionary<string, BoardingGate>();
 
-Dictionary<string, string> specialCodeDictionary = new Dictionary<string, string>();  // Used for feature 5
+Dictionary<string, string> specialCodeDictionary = new Dictionary<string, string>();  // Used for feature 5 AND feature 8
 
 // Main Program
 
@@ -64,7 +64,7 @@ while (option != "0")
             DisplayFlightSchedule();
             Console.WriteLine();
             break;
-        case "6": // Feature 8 
+        case "6": // Feature 8 - Complete
             ModifyFlightDetails();
             Console.WriteLine();
             break;
@@ -74,7 +74,7 @@ while (option != "0")
             break;
 
         case "0": // Exit
-
+            Console.WriteLine("Goodbye!");
             break;
         default:
             Console.WriteLine("Invalid Option! Please try again.\n");
@@ -740,7 +740,7 @@ void DisplayAirlineFlights(string code)
                     string[] airlineCode2 = f.FlightNumber.Split(' ');
                     if (airlineCode2[0] == airlineCode)
                     {
-                        Console.WriteLine($"{f.FlightNumber,-15}{airlineDictionary[airlineCode2[0]].Name,-20}{f.Origin,-21}{f.Destination,-19} {f.ExpectedTime}");
+                        Console.WriteLine($"{f.FlightNumber,-15}{airlineDictionary[airlineCode2[0]].Name,-20}{f.Origin,-21}{f.Destination,-19}{f.ExpectedTime}");
                     }
                 }
 
@@ -780,39 +780,40 @@ void DisplayFlightSchedule()
         string airlineCode = Console.ReadLine();
 
         DisplayAirlineFlights(airlineCode);
-
+        
         //User Selection of Flight Number
 
         Console.WriteLine();
         Console.Write("Pls enter the flight number: ");
         string selectedFlightNumber = Console.ReadLine();
 
+
         foreach (Flight A in flightDictionary.Values) // Searching and Displaying the flight details
         {
-            string[] airlineCode2 = A.FlightNumber.Split(' ');
-            if (airlineCode2[0] == airlineCode)
+            if (A.FlightNumber == selectedFlightNumber)
             {
-                if (airlineCode2[1] == selectedFlightNumber)
-                {
-                    // Flight Number, Airline Name, Origin, Destination, and Expected Departure/Arrival Time, Special Request Code
+                // Flight Number, Airline Name, Origin, Destination, and Expected Departure/Arrival Time, Special Request Code
 
-                    Console.WriteLine();
+                Console.WriteLine();
 
-                    Console.WriteLine($"{"Flight Number",-15}" +
-                        $"{"Airline Name",-20}" +
-                        $"{"Origin",-21}" +
-                        $"{"Destination",-19}" +
-                        $"{"Expected Time",-25}" +
-                        $"{"Status",-5}");
+                Console.WriteLine($"{"Flight Number",-15}" +
+                    $"{"Airline Name",-20}" +
+                    $"{"Origin",-21}" +
+                    $"{"Destination",-19}" +
+                    $"{"Expected Time",-25}" +
+                    $"{"Status",-10}" +
+                    $"{"Boarding Gate",-15}"
+                    );
 
-                    Console.WriteLine($"{A.FlightNumber,-15}" +
-                        $"{airlineDictionary[airlineCode2[0]].Name,-20}" +
-                        $"{A.Origin,-21}" +
-                        $"{A.Destination,-19}" +
-                        $"{A.ExpectedTime,-25}" +
-                        $"{A.Status,-5}");
-                    return;
-                }
+                Console.WriteLine($"{A.FlightNumber,-15}" +
+                    $"{airlineDictionary[airlineCode].Name,-20}" +
+                    $"{A.Origin,-21}" +
+                    $"{A.Destination,-19}" +
+                    $"{A.ExpectedTime,-25}" +
+                    $"{A.Status,-10}" +
+                    $"{boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == A.FlightNumber)?.GateName ?? "Unassigned",-15}"
+                    );
+                return;
             }
         }
 
@@ -904,29 +905,36 @@ void ModifyFlightDetails()
                 string[] airlineCode2 = A.FlightNumber.Split(' ');
                 if (airlineCode2[1] == ChosenFlightSplit[1])
                 {
-                    //Basic Information except the Flight Number itself
-                    //(i.e. Origin, Destination, and Expected Departure/Arrival Time),
-                    //or Status, Special Request Code and update the Flight object’s information accordingly
-
-                    Console.WriteLine();
-
-                    Console.WriteLine($"{"Flight Number",-15}" +
-                        $"{"Airline Name",-25}" +
-                        $"{"Origin",-20}" +
-                        $"{"Destination",-20}" +
-                        $"{"Expected Time",-25}" +
-                        $"{"Status",-5}");
-
-                    Console.WriteLine($"{A.FlightNumber,-15}" +
-                        $"{airlineDictionary[airlineCode2[0]].Name,-25}" +
-                        $"{A.Origin,-20}" +
-                        $"{A.Destination,-20}" +
-                        $"{A.ExpectedTime,-25}" +
-                        $"{A.Status,-20}"
-                        );
-
+                    
                     while (true)
                     {
+                        //Basic Information except the Flight Number itself
+                        //(i.e. Origin, Destination, and Expected Departure/Arrival Time),
+                        //or Status, Special Request Code and update the Flight object’s information accordingly
+                        string SpecialRequestCode = specialCodeDictionary[ChosenFlight];
+                        Console.WriteLine();
+
+                        Console.WriteLine($"{"Flight Number",-15}" +
+                            $"{"Airline Name",-25}" +
+                            $"{"Origin",-20}" +
+                            $"{"Destination",-20}" +
+                            $"{"Expected Time",-25}" +
+                            $"{"Status",-10}" +
+                            $"{"Special Request Code",-22}" +
+                            $"{"Boarding Gate",-15}"
+                            );
+
+                        Console.WriteLine($"{A.FlightNumber,-15}" +
+                            $"{airlineDictionary[airlineCode2[0]].Name,-25}" +
+                            $"{A.Origin,-20}" +
+                            $"{A.Destination,-20}" +
+                            $"{A.ExpectedTime,-25}" +
+                            $"{A.Status,-10}" +
+                            $"{SpecialRequestCode,-22}" +
+                            $"{boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == A.FlightNumber)?.GateName ?? "Unassigned",-15}"
+                            );
+
+
                         Console.WriteLine("What would you like to modify?");
                         Console.WriteLine("[1] Modify Basic Information");
                         Console.WriteLine("[2] Modify Status");
@@ -945,7 +953,7 @@ void ModifyFlightDetails()
                             // Reused Function from method 6
 
                             A.Destination = ValidateOriginDestination(A.Destination, "Destination");
-           
+
 
 
                             // Modify Time
@@ -955,12 +963,6 @@ void ModifyFlightDetails()
                                 {
                                     Console.Write("\nEnter expected Departure/Arrival time (dd/mm/yyyy hh:mm): ");
                                     string expectedTime = Console.ReadLine();
-
-                                    // Checks if time is empty
-                                    if (string.IsNullOrWhiteSpace(expectedTime))
-                                    {
-                                        throw new ArgumentException("Expected Departure/Arrival Time cannot be empty");
-                                    }
 
                                     string[] splittedTime = expectedTime.Split(' ');
 
@@ -999,7 +1001,8 @@ void ModifyFlightDetails()
                         // Modify Status
                         else if (User_Action2 == "2")
                         {
-
+                            Console.Write("Enter new Status: ");
+                            A.Status = Console.ReadLine();
                         }
 
                         // Modify Special Request Code
@@ -1007,22 +1010,24 @@ void ModifyFlightDetails()
                         {
                             while (true)
                             {
-                                Console.WriteLine("Possible Statuses CFFT, DDJB, LWTTF, NORM (Will Return Null)");
-                                Console.Write("Enter Status: ");
+                                Console.WriteLine("Possible Special Request Code: CFFT, DDJB, LWTTF, NORM (Will Return Null)");
+                                Console.WriteLine("Enter Special Request Code: ");
 
                                 try
                                 {
-                                    String New_Status = Console.ReadLine();
+                                    string New_Status = Console.ReadLine();
 
                                     if (New_Status == "CFFT" || New_Status == "DDJB" || New_Status == "LWTTF")
                                     {
-                                        A.Status = Console.ReadLine();
+                                        specialCodeDictionary[A.FlightNumber] = New_Status; // Assign the status directly from user input
+                                        Console.WriteLine($"Status updated to: {A.Status}");
                                         break;
                                     }
 
                                     else if (New_Status == "NORM")
                                     {
-                                        A.Status = null;
+                                        specialCodeDictionary[A.FlightNumber] = null;
+                                        Console.WriteLine("Status updated to: Null");
                                         break;
                                     }
 
@@ -1031,22 +1036,79 @@ void ModifyFlightDetails()
                                         throw new ArgumentException("Invalid Status");
                                     }
                                 }
-
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine($"{ex}");
+                                    Console.WriteLine($"Error: {ex.Message} - Please enter a valid status.");
                                 }
                             }
                         }
 
+
                         // Modify Boarding Gate
                         else if (User_Action2 == "4")
                         {
+                            try
+                            {
+                                while (true)
+                                {
+                                    ListBoardingGates();
+                                    Console.WriteLine("Enter Boarding Gate Name: ");
+                                    string boardingGate = Console.ReadLine().ToUpper();
 
+                                    if (boardingGateDictionary.ContainsKey(boardingGate))
+                                    {
+                                        if (boardingGateDictionary[boardingGate].SupportsCFFT == true && specialCodeDictionary[A.FlightNumber] == "CFFT")
+                                        {
+                                            boardingGateDictionary[boardingGate].Flight = A;
+                                            Console.WriteLine("Boarding Gate has been assigned to Flight");
+                                            break;
+                                        }
+
+                                        else if (boardingGateDictionary[boardingGate].SupportsDDJB == true && specialCodeDictionary[A.FlightNumber] == "DDJB")
+                                        {
+                                            boardingGateDictionary[boardingGate].Flight = A;
+                                            Console.WriteLine("Boarding Gate has been assigned to Flight");
+                                            break;
+                                        }
+
+                                        else if (boardingGateDictionary[boardingGate].SupportsLWTT == true && specialCodeDictionary[A.FlightNumber] == "LWTT")
+                                        {
+                                            boardingGateDictionary[boardingGate].Flight = A;
+                                            Console.WriteLine("Boarding Gate has been assigned to Flight");
+                                            break;
+                                        }
+
+                                        else
+                                        {
+                                            throw new ArgumentException("Boarding Gate does not support the Special Request Code of the Flight");
+                                        }
+                                    }
+
+                                    else
+                                    {
+                                        throw new ArgumentException("Invalid Boarding Gate");
+                                    }
+                                }
+                            }
+
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"{ex}");
+                            }
                         }
 
                         else if (User_Action2 == "5")
                         {
+                            Console.WriteLine("Flight updated!");
+                            Console.WriteLine($"Flight Number: {A.FlightNumber,-15}" +
+                            $"\nAirline Name: {airlineDictionary[airlineCode2[0]].Name,-25}" +
+                            $"\nOrigin: {A.Origin,-20}" +
+                            $"\nDestination: {A.Destination,-20}" +
+                            $"\nExpected Departure/Arrival Time: {A.ExpectedTime,-25}" +
+                            $"\nStatus: {A.Status,-10}" +
+                            $"\nSpecial Request Code: {SpecialRequestCode,-22}" +
+                            $"\nBoarding Gate: {boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == A.FlightNumber)?.GateName ?? "Unassigned",-15}"
+                            );
                             break;
                         }
 
