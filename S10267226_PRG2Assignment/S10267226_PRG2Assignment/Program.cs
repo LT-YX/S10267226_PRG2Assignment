@@ -3,7 +3,10 @@
 // Student Name : Lovette Tew Yu Xin
 // Partner Name : Tan Sheng Zhe Zander
 //===========================================================
-
+// Features:
+// - Lovette: 2,3,5,6,9
+// - Zander:  1,4,7,8 
+//===========================================================
 
 using System.Collections.Specialized;
 using System.Diagnostics.Metrics;
@@ -13,6 +16,7 @@ using S10267226_PRG2Assignment;
 using System.Data.Common;
 using System;
 using static System.Net.Mime.MediaTypeNames;
+using System.Runtime.Intrinsics.X86;
 
 //
 Dictionary<string, Flight> flightDictionary = new Dictionary<string, Flight>();
@@ -101,11 +105,155 @@ void DisplayMenu()
         "\n0. Exit\n");
 }
 
-// Feature 1
+// Validation Methods
 
+// -- Validation for Empty inputs
+void ValidateEmpty(string? toBeValidated, string errorMessage)
+{
+    if (string.IsNullOrWhiteSpace(toBeValidated))
+    {
+        throw new ArgumentException($"{errorMessage} cannot be empty");
+    }
+}
+
+// -- Validation for inputs that have at least two portions [Origin and Destination can have more portions]
+void ValidateSplit(string[] split, string errorMessage)
+{
+    if (split.Length < 2)
+    {
+        throw new ArgumentException(errorMessage);
+    }
+}
+// - Validation for origin and destinations inputs
+string ValidateOriginDestination(string location, string text)
+{
+    string cityName;
+    string airportCode;
+    while (true)
+    {
+        try
+        {
+            Console.WriteLine($"\nEnter {text}: ");
+            location = Console.ReadLine().Trim();
+
+            // Check if origin/destination is empty
+            ValidateEmpty(location, text);
+
+            // Check if origin/destination contains both city name and airport code
+            string[] locationParts = location.Split(" ");
+
+            ValidateSplit(locationParts, $"{text} entered is missing city name or airport code");
+
+            cityName = "";
+
+            // Compensates for the case where city names have multiple parts to it
+            for (int i = 0; i < locationParts.Length-1;i++)
+            {
+                cityName += locationParts[i] + " ";
+                Console.WriteLine(cityName);
+            }
+            // Removes additional whitespace
+            cityName = cityName.Trim();
+
+            // Check if city name of origin/destination contains only letters or spaces
+            if (!cityName.All(c => char.IsLetter(c) || char.IsWhiteSpace(c))) // Returns true when city name is not entirely letters or spaces
+            {
+                throw new ArgumentException($"{text} City name can only contain letters or spaces");
+            }
+
+            // Checks if origin/destination airport code is of correct length
+            airportCode = locationParts[locationParts.Length-1] ;
+
+            if (airportCode.Length != 5 || !airportCode[1..4].All(char.IsLetter)) // Check of length inclusive of ()
+            {
+                throw new ArgumentException("Airport code must contain only 3 letters and enclosed in parantheses ().");
+            }
+
+            // Formatting of origin
+            location = char.ToUpper(cityName[0]) + cityName.Substring(1) + " " + airportCode.ToUpper();
+            // Substring(1) means index 1 and onwards
+
+            Console.WriteLine($"{text} entered: {location}");
+            break;
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine($"{text} must be in the format of \"City followed by a space and Airport code enclosed in parantheses\"\n- Example: Singapore (SIN)");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Unexpected error: " + ex.Message);
+            Console.WriteLine($"{text} must be in the format of \"City followed by a space and Airport code enclosed in parantheses\"\n- Example: Singapore (SIN)");
+        }
+    }
+    return location;
+}
+// -- Validation for time inputs
+DateTime ValidateExpectedTime(string expectedTime)
+{
+    DateTime validatedTime;
+    while (true)
+    {
+        try
+        {
+            Console.WriteLine("\nEnter expected Departure/Arrival time (dd/mm/yyyy hh:mm): ");
+            expectedTime = Console.ReadLine();
+
+            // Checks if time is empty
+            ValidateEmpty(expectedTime, "Expected Departure/Arrival Time");
+
+            string[] splittedTime = expectedTime.Split(' ');
+
+            // Checks if time can be split into date and time to check for date and time portion
+            ValidateSplit(splittedTime, "Expecture Departure/Arrival Time is missing Date or Time portions");
+
+            // validate date and time portion
+            string date = splittedTime[0];
+            string time = splittedTime[1];
+
+            if (date.Any(char.IsLetter) || time.Any(char.IsLetter)) // Checks if letters are present in date & time | Not checking for digits only since / is not a digit
+            {
+                throw new ArgumentException("Expecture Departure/Arrival Time cannot contain letters");
+            }
+
+            validatedTime = Convert.ToDateTime(expectedTime);
+            Console.WriteLine($"Expected Departure/Arrival Time: {validatedTime}");
+            break;
+        }
+        catch (ArgumentException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Expected Time entered is in the wrong format.");
+            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Unexpected error: " + ex.Message);
+            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
+        }
+    }
+    return validatedTime;
+}
+
+// -- Check if a value is contained in the list
+void ValidatePresence(List<string> itemList, string item, string errorMessage)
+{
+    if (!itemList.Contains(item)) // Alternative is itemList.Contains(item) == False | Using ! shortens it to if (true)
+    {
+        throw new ArgumentException(errorMessage);
+    }
+}
+
+
+// Feature 1
 void ReadAirlines()
 {
-    int counter = 0;
+    int counter = 0; // Counter to display the number of airlines loaded
     try
     {
         using (StreamReader sr = new StreamReader("airlines.csv"))
@@ -129,7 +277,7 @@ void ReadAirlines()
 
 void ReadBoardingGates()
 {
-    int counter = 0;    
+    int counter = 0; // Counter to display number of boarding gates loaded
     try
     {
         using (StreamReader sr = new StreamReader("boardinggates.csv"))
@@ -156,7 +304,7 @@ void ReadBoardingGates()
 
 void LoadFlights()
 {
-    int counter = 0;
+    int counter = 0; // counter to display number of flights loaded
     try
     {
         using (StreamReader sr = new StreamReader("flights.csv"))
@@ -169,7 +317,8 @@ void LoadFlights()
                 {
                     NORMFlight nf = new NORMFlight(information[0], information[1], information[2], Convert.ToDateTime(information[3])); // NormFlight
                     flightDictionary.Add(information[0], nf);
-                    specialCodeDictionary.Add(information[0], information[4]);
+                    // stores the special request code and matches it to the flight since flight does not store special request code
+                    specialCodeDictionary.Add(information[0], information[4]); 
                 }
                 else
                 {
@@ -233,15 +382,6 @@ void ListBoardingGates()
 }
 
 // Feature 5
-
-// Validation for Empty inputs
-void ValidateEmpty(string? toBeValidated, string errorMessage)
-{
-    if (string.IsNullOrWhiteSpace(toBeValidated))
-    {
-        throw new ArgumentException($"{errorMessage} cannot be empty");
-    }
-}
 
 void assignBoardingGate()
 {
@@ -391,123 +531,19 @@ void assignBoardingGate()
 
 
 // Feature 6
-void CreateAirLineCodeList(List<string> airlineCodeList) // Ensures that when flights.csv is changed, the valid airline codes are 
+
+// Ensures that when airlines.csv is changed, the valid airline codes are updated | Incase airlines are removed or added
+void CreateAirLineCodeList(List<string> airlineCodeList) 
 {
     foreach(var airline in airlineDictionary.Values)
     {
         airlineCodeList.Add(airline.Code);
     }
 }
-string ValidateOriginDestination(string location, string text)
-{
-    string cityName;
-    string airportCode;
-    while (true)
-    {
-        try
-        {
-            Console.WriteLine($"\nEnter {text}: ");
-            location = Console.ReadLine().Trim();
 
-            // Check if origin/destination is empty
-            ValidateEmpty(location, text);
-
-            // Check if origin/destination contains both city name and airport code
-            string[] locationParts = location.Split(" ");
-            if (locationParts.Length != 2)
-            {
-                throw new ArgumentException($"{text} entered is missing city name or airport code");
-            }
-
-            cityName = locationParts[0];
-
-            // Check if origin/destination contains numbers
-            if (!cityName.All(char.IsLetter))
-            {
-                throw new ArgumentException($"{text} City cannot contain Digits");
-            }
-
-            // Checks if origin/destination airport code is of correct length
-            airportCode = locationParts[1];
-
-            if (airportCode.Length != 5 || !airportCode[1..4].All(char.IsLetter)) // Check of length inclusive of ()
-            {
-                throw new ArgumentException("Airport code must contain only 3 letters");
-            }
-
-            // Formatting of origin
-            location = char.ToUpper(cityName[0]) + cityName.Substring(1) + " " + airportCode.ToUpper(); 
-            // Substring(1) means index 1 and onwards
-
-            Console.WriteLine($"{text} entered: {location}");
-            break;
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine($"{text} must be in the format of \"City followed by a space and Airport code enclosed in parantheses\"\n- Example: Singapore (SIN)");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Unexpected error: " + ex.Message);
-            Console.WriteLine($"{text} must be in the format of \"City followed by a space and Airport code enclosed in parantheses\"\n- Example: Singapore (SIN)");
-        }
-    }
-    return location;
-}
-DateTime ValidateExpectedTime(string expectedTime)
-{
-    DateTime validatedTime;
-    while (true)
-    {
-        try
-        {
-            Console.WriteLine("\nEnter expected Departure/Arrival time (dd/mm/yyyy hh:mm): ");
-            expectedTime = Console.ReadLine();
-
-            // Checks if time is empty
-            ValidateEmpty(expectedTime, "Expected Departure/Arrival Time");
-
-            string[] splittedTime = expectedTime.Split(' ');
-
-            // Checks if time can be split into date and time to check for date and time portion
-            if (splittedTime.Length != 2)
-            {
-                throw new ArgumentException("Expecture Departure/Arrival Time is missing Date or Time portions");
-            }
-
-            // validate date and time portion
-            string date = splittedTime[0];
-            string time = splittedTime[1];
-
-            if (date.Any(char.IsLetter) || time.Any(char.IsLetter)) // Checks if letters are present in date & time
-            {
-                throw new ArgumentException("Expecture Departure/Arrival Time cannot contain letters");
-            }
-
-            validatedTime = Convert.ToDateTime(expectedTime);
-            Console.WriteLine($"Expected Departure/Arrival Time: {validatedTime}");
-            break;
-        }
-        catch (ArgumentException ex)
-        {
-            Console.WriteLine(ex.Message);
-            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
-        }
-        catch (FormatException)
-        {
-            Console.WriteLine("Expected Time entered is in the wrong format.");
-            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine("Unexpected error: " + ex.Message);
-            Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
-        }
-    }
-    return validatedTime;
-}
 void CreateNewFlight()
+
+    // Variables used in the method. Some have a dummy value assigned to it so that Visual Studio doesn't produce a warning
 {
     string repeat = "Y";
 
@@ -553,25 +589,15 @@ void CreateNewFlight()
                 string[] splittedFlightNumber = flightNumber.Split(' ');
 
                 // Checks if flight number can be split into airline code and numbers
-                if (splittedFlightNumber.Length != 2)
-                {
-                    throw new ArgumentException("Invalid format for flight number");
-                }
+                ValidateSplit(splittedFlightNumber, "Invalid format for flight number");
 
                 code = splittedFlightNumber[0];
                 number = splittedFlightNumber[1];
 
                 // Checks if airline code is in valid airline codes - Airline codes can be 2-3 letters but are usually 2 letters since some flight systems do not account for 3-digit airline codes [IATA Standard]
                 // This code works for airline codes of any length as long as it existed inside airlines.csv
-                if (!airlineCodeList.Contains(code.ToUpper()))
-                {
-                    if (code.All(char.IsLetter) == false) // Checks for reason why code not in airlineCodeList - Code contains numbers [This is kept here incase airline codes with numbers become a new standard]
-                    {
-                        throw new ArgumentException("Airline codes of flight numbers must contain only letters");
-                    }
-                    throw new ArgumentException("Invalid airline code for Changi Airport Terminal 5");
-                }
-
+                ValidatePresence(airlineCodeList, code.ToUpper(), "Invalid airline code for Changi Airport Terminal 5");
+                
                 //Checks if number portion of flight number are numbers and of an acceptable length - Numbers can range from 1 to 4 [IATA standard]
                 if (number.Length < 1 || number.Length > 4 || !number.All(char.IsDigit))
                 {
@@ -596,7 +622,11 @@ void CreateNewFlight()
             catch (ArgumentException ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.WriteLine("Flight Number should be in the format of \"2-Letter code followed by a space and 1 to 4 digits\" - Example: BA 123\n");
+                if (code.All(char.IsLetter) == false) // Checks for characters that are not letters. This allows the user to be informed that airline codes can only contain letters when they type in not letters
+                {
+                    Console.WriteLine("\"Airline codes of flight numbers must contain only letters\"");
+                }
+                    Console.WriteLine("Flight Number should be in the format of \"2-Letter code followed by a space and 1 to 4 digits\" - Example: BA 123\n");
             }
             catch (Exception ex)
             {
@@ -644,10 +674,8 @@ void CreateNewFlight()
 
                 specialRequestCode = specialRequestCode.ToUpper();
 
-                if (!requestCodeList.Contains(specialRequestCode))
-                {
-                    throw new ArgumentException("Invalid Special Request Code entered.");
-                }
+                // Check if special request code exists
+                ValidatePresence(requestCodeList, specialRequestCode, "Invalid Special Request Code entered.");
                 
                 Console.WriteLine($"Special Request Code entered: {specialRequestCode}");
                 break;
@@ -664,6 +692,11 @@ void CreateNewFlight()
             }
 
         }
+
+        // Add Flight's special request code to special request code dictionary - Ensures that feature 5 works
+        // This is added here because the if-statements will modify special request code so that it'll be in the right format when writing to file.
+        specialCodeDictionary.Add(flightNumber, specialRequestCode);
+
         Flight newflight;
         if (specialRequestCode == "NONE")
         {
@@ -690,7 +723,8 @@ void CreateNewFlight()
 
         // Add Flight to Flight Dictionary
         flightDictionary.Add(flightNumber, newflight);
-
+        
+        
         // Adding Flight to flights.csv
         using (StreamWriter sw = new StreamWriter("flights.csv",true)) // true lets text be appeneded
         {
@@ -788,9 +822,9 @@ void DisplayFlightSchedule()
         string selectedFlightNumber = Console.ReadLine();
 
 
-        foreach (Flight A in flightDictionary.Values) // Searching and Displaying the flight details
+        foreach (Flight flight in flightDictionary.Values) // Searching and Displaying the flight details
         {
-            if (A.FlightNumber == selectedFlightNumber)
+            if (flight.FlightNumber == selectedFlightNumber)
             {
                 // Flight Number, Airline Name, Origin, Destination, and Expected Departure/Arrival Time, Special Request Code
 
@@ -805,13 +839,13 @@ void DisplayFlightSchedule()
                     $"{"Boarding Gate",-15}"
                     );
 
-                Console.WriteLine($"{A.FlightNumber,-15}" +
+                Console.WriteLine($"{flight.FlightNumber,-15}" +
                     $"{airlineDictionary[airlineCode].Name,-20}" +
-                    $"{A.Origin,-21}" +
-                    $"{A.Destination,-19}" +
-                    $"{A.ExpectedTime,-25}" +
-                    $"{A.Status,-10}" +
-                    $"{boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == A.FlightNumber)?.GateName ?? "Unassigned",-15}"
+                    $"{flight.Origin,-21}" +
+                    $"{flight.Destination,-19}" +
+                    $"{flight.ExpectedTime,-25}" +
+                    $"{flight.Status,-10}" +
+                    $"{boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == flight.FlightNumber)?.GateName ?? "Unassigned",-15}"
                     );
                 return;
             }
@@ -900,9 +934,9 @@ void ModifyFlightDetails()
         // Action 1
         if (User_Action == "1")
         {          
-            foreach (Flight A in AirlineFlightDictionary.Values)
+            foreach (Flight flight in AirlineFlightDictionary.Values)
             {
-                string[] airlineCode2 = A.FlightNumber.Split(' ');
+                string[] airlineCode2 = flight.FlightNumber.Split(' ');
                 if (airlineCode2[1] == ChosenFlightSplit[1])
                 {
                     
@@ -924,14 +958,14 @@ void ModifyFlightDetails()
                             $"{"Boarding Gate",-15}"
                             );
 
-                        Console.WriteLine($"{A.FlightNumber,-15}" +
+                        Console.WriteLine($"{flight.FlightNumber,-15}" +
                             $"{airlineDictionary[airlineCode2[0]].Name,-25}" +
-                            $"{A.Origin,-20}" +
-                            $"{A.Destination,-20}" +
-                            $"{A.ExpectedTime,-25}" +
-                            $"{A.Status,-10}" +
+                            $"{flight.Origin,-20}" +
+                            $"{flight.Destination,-20}" +
+                            $"{flight.ExpectedTime,-25}" +
+                            $"{flight.Status,-10}" +
                             $"{SpecialRequestCode,-22}" +
-                            $"{boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == A.FlightNumber)?.GateName ?? "Unassigned",-15}"
+                            $"{boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == flight.FlightNumber)?.GateName ?? "Unassigned",-15}"
                             );
 
 
@@ -941,7 +975,7 @@ void ModifyFlightDetails()
                         Console.WriteLine("[3] Modify Special Request Code");
                         Console.WriteLine("[4] Modify Boarding Gate");
                         Console.WriteLine("[5] Exit");
-                        Console.WriteLine("Pls enter an option");
+                        Console.WriteLine("Please enter an option: ");
                         string User_Action2 = Console.ReadLine();
 
 
@@ -949,60 +983,24 @@ void ModifyFlightDetails()
                         if (User_Action2 == "1")
                         {
                             // Reused Function from method 6
-                            A.Origin = ValidateOriginDestination(A.Origin, "Origin");
+                            flight.Origin = ValidateOriginDestination(flight.Origin, "Origin");
                             // Reused Function from method 6
 
-                            A.Destination = ValidateOriginDestination(A.Destination, "Destination");
+                            flight.Destination = ValidateOriginDestination(flight.Destination, "Destination");
 
 
 
                             // Modify Time
-                            while (true)
-                            {
-                                try
-                                {
-                                    Console.Write("\nEnter expected Departure/Arrival time (dd/mm/yyyy hh:mm): ");
-                                    string expectedTime = Console.ReadLine();
-
-                                    string[] splittedTime = expectedTime.Split(' ');
-
-                                    // Checks if time can be split into date and time to check for date and time portion
-                                    if (splittedTime.Length != 2)
-                                    {
-                                        throw new ArgumentException("Expecture Departure/Arrival Time is missing Date or Time portions");
-                                    }
-
-                                    // validate date and time portion
-                                    string date = splittedTime[0];
-                                    string time = splittedTime[1];
-
-                                    if (date.Any(char.IsLetter) || time.Any(char.IsLetter)) // Checks if letters are present in date & time
-                                    {
-                                        throw new ArgumentException("Expecture Departure/Arrival Time cannot contain letters");
-                                    }
-
-                                    A.ExpectedTime = Convert.ToDateTime(expectedTime);
-                                    Console.WriteLine($"Expected Departure/Arrival Time: {A.ExpectedTime}");
-                                    break;
-                                }
-                                catch (ArgumentException ex)
-                                {
-                                    Console.WriteLine(ex.Message);
-                                    Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
-                                }
-                                catch (FormatException)
-                                {
-                                    Console.WriteLine("Expected Time entered is in the wrong format.");
-                                    Console.WriteLine("Format for Departure/Arrival time is (dd/mm/yyyy hh:mm) - Example: 13/01/2025 15:40");
-                                }
-                            }
+                            string expectedTime = ""; // Place holder value
+                            DateTime newTime = ValidateExpectedTime(expectedTime);
+                            flight.ExpectedTime = newTime;
                         }
 
                         // Modify Status
                         else if (User_Action2 == "2")
                         {
                             Console.Write("Enter new Status: ");
-                            A.Status = Console.ReadLine();
+                            flight.Status = Console.ReadLine();
                         }
 
                         // Modify Special Request Code
@@ -1010,24 +1008,26 @@ void ModifyFlightDetails()
                         {
                             while (true)
                             {
-                                Console.WriteLine("Possible Special Request Code: CFFT, DDJB, LWTTF, NORM (Will Return Null)");
+                                Console.WriteLine("Possible Special Request Code: CFFT, DDJB, LWTT. Enter None if flight has no special request.");
                                 Console.WriteLine("Enter Special Request Code: ");
 
                                 try
                                 {
-                                    string New_Status = Console.ReadLine();
+                                    string New_Status = Console.ReadLine().Trim().ToUpper(); 
+                                    // Trim removes whitespace
+                                    // Ensures that when the enters the request code in lower case it is still accepted
 
                                     if (New_Status == "CFFT" || New_Status == "DDJB" || New_Status == "LWTTF")
                                     {
-                                        specialCodeDictionary[A.FlightNumber] = New_Status; // Assign the status directly from user input
-                                        Console.WriteLine($"Status updated to: {A.Status}");
+                                        specialCodeDictionary[flight.FlightNumber] = New_Status; // Assign the status directly from user input
+                                        Console.WriteLine($"Status updated to: {flight.Status}");
                                         break;
                                     }
 
-                                    else if (New_Status == "NORM")
+                                    else if (New_Status == "NONE")
                                     {
-                                        specialCodeDictionary[A.FlightNumber] = null;
-                                        Console.WriteLine("Status updated to: Null");
+                                        specialCodeDictionary[flight.FlightNumber] = "NONE";
+                                        Console.WriteLine("Special request code set to "+ New_Status);
                                         break;
                                     }
 
@@ -1057,23 +1057,23 @@ void ModifyFlightDetails()
 
                                     if (boardingGateDictionary.ContainsKey(boardingGate))
                                     {
-                                        if (boardingGateDictionary[boardingGate].SupportsCFFT == true && specialCodeDictionary[A.FlightNumber] == "CFFT")
+                                        if (boardingGateDictionary[boardingGate].SupportsCFFT == true && specialCodeDictionary[flight.FlightNumber] == "CFFT")
                                         {
-                                            boardingGateDictionary[boardingGate].Flight = A;
+                                            boardingGateDictionary[boardingGate].Flight = flight;
                                             Console.WriteLine("Boarding Gate has been assigned to Flight");
                                             break;
                                         }
 
-                                        else if (boardingGateDictionary[boardingGate].SupportsDDJB == true && specialCodeDictionary[A.FlightNumber] == "DDJB")
+                                        else if (boardingGateDictionary[boardingGate].SupportsDDJB == true && specialCodeDictionary[flight.FlightNumber] == "DDJB")
                                         {
-                                            boardingGateDictionary[boardingGate].Flight = A;
+                                            boardingGateDictionary[boardingGate].Flight = flight;
                                             Console.WriteLine("Boarding Gate has been assigned to Flight");
                                             break;
                                         }
 
-                                        else if (boardingGateDictionary[boardingGate].SupportsLWTT == true && specialCodeDictionary[A.FlightNumber] == "LWTT")
+                                        else if (boardingGateDictionary[boardingGate].SupportsLWTT == true && specialCodeDictionary[flight.FlightNumber] == "LWTT")
                                         {
-                                            boardingGateDictionary[boardingGate].Flight = A;
+                                            boardingGateDictionary[boardingGate].Flight = flight;
                                             Console.WriteLine("Boarding Gate has been assigned to Flight");
                                             break;
                                         }
@@ -1100,14 +1100,14 @@ void ModifyFlightDetails()
                         else if (User_Action2 == "5")
                         {
                             Console.WriteLine("Flight updated!");
-                            Console.WriteLine($"Flight Number: {A.FlightNumber,-15}" +
+                            Console.WriteLine($"Flight Number: {flight.FlightNumber,-15}" +
                             $"\nAirline Name: {airlineDictionary[airlineCode2[0]].Name,-25}" +
-                            $"\nOrigin: {A.Origin,-20}" +
-                            $"\nDestination: {A.Destination,-20}" +
-                            $"\nExpected Departure/Arrival Time: {A.ExpectedTime,-25}" +
-                            $"\nStatus: {A.Status,-10}" +
+                            $"\nOrigin: {flight.Origin,-20}" +
+                            $"\nDestination: {flight.Destination,-20}" +
+                            $"\nExpected Departure/Arrival Time: {flight.ExpectedTime,-25}" +
+                            $"\nStatus: {flight.Status,-10}" +
                             $"\nSpecial Request Code: {SpecialRequestCode,-22}" +
-                            $"\nBoarding Gate: {boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == A.FlightNumber)?.GateName ?? "Unassigned",-15}"
+                            $"\nBoarding Gate: {boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == flight.FlightNumber)?.GateName ?? "Unassigned",-15}"
                             );
                             break;
                         }
@@ -1127,9 +1127,9 @@ void ModifyFlightDetails()
         {
 
 
-            foreach (Flight A in AirlineFlightDictionary.Values)
+            foreach (Flight flight in AirlineFlightDictionary.Values)
             {
-                string[] airlineCode2 = A.FlightNumber.Split(' ');
+                string[] airlineCode2 = flight.FlightNumber.Split(' ');
 
                 if (airlineCode2[1] == ChosenFlightSplit[1])
                 {
@@ -1146,12 +1146,12 @@ void ModifyFlightDetails()
                         $"{"Expected Time",-25}" +
                         $"{"Status",-5}");
 
-                    Console.WriteLine($"{A.FlightNumber,-15}" +
+                    Console.WriteLine($"{flight.FlightNumber,-15}" +
                         $"{airlineDictionary[airlineCode2[0]].Name,-25}" +
-                        $"{A.Origin,-20}" +
-                        $"{A.Destination,-20}" +
-                        $"{A.ExpectedTime,-25}" +
-                        $"{A.Status,-20}");
+                        $"{flight.Origin,-20}" +
+                        $"{flight.Destination,-20}" +
+                        $"{flight.ExpectedTime,-25}" +
+                        $"{flight.Status,-20}");
                 }
             }
 
@@ -1163,12 +1163,13 @@ void ModifyFlightDetails()
 
                 if (User_Action3 == "Y")
                 {
-                    foreach (Flight A in AirlineFlightDictionary.Values)
+                    foreach (Flight flight in AirlineFlightDictionary.Values)
                     {
-                        string[] airlineCode2 = A.FlightNumber.Split(' ');
+                        string[] airlineCode2 = flight.FlightNumber.Split(' ');
                         if (airlineCode2[1] == ChosenFlightSplit[1])
                         {
-                            flightDictionary.Remove(A.FlightNumber);
+                            // Removes flight from flight dictionary
+                            flightDictionary.Remove(flight.FlightNumber);
                             Console.WriteLine("Flight has been deleted");
                             break;
                         }
