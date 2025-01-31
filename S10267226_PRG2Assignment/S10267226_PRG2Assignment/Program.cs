@@ -81,8 +81,9 @@ while (option != "0")
             Console.WriteLine();
             break;
 
-        case "8": // Additional Feature a
-
+        case "8": // Additional Feature A
+            ProcessUnassignedFlights();
+            Console.WriteLine();
             break;
 
         case "0": // Exit
@@ -1378,4 +1379,133 @@ void DisplayFlightsChronologicalOrder()
 
     }
 
+}
+
+// Advanced Feature A - Process all unassigned flights to boarding gates in bulk
+
+void ProcessUnassignedFlights()
+{
+    Queue<Flight> flightQueue = new Queue<Flight>();
+
+    int unassignedFlightsCount = 0;
+    int assignedFlightsCount = 0;
+
+    // Adding Unassigned flights to queue
+    foreach (Flight flight in flightDictionary.Values)
+    {
+        if (flight == null)
+        {
+            continue; // Skip any null flight entries
+        }
+
+        bool isAssigned = false; // Track if the flight is assigned
+
+        foreach (BoardingGate boardingGate in boardingGateDictionary.Values)
+        {
+            if (boardingGate.Flight != null && flight.FlightNumber == boardingGate.Flight.FlightNumber)
+            {
+                assignedFlightsCount++;
+                isAssigned = true;
+                break; // Exit the loop once the flight is found assigned
+            }
+        }
+
+        if (!isAssigned)
+        {
+            unassignedFlightsCount++;
+            flightQueue.Enqueue(flight);
+        }
+    }
+
+    Console.WriteLine();
+    Console.WriteLine($"Total number of Flights without Boarding Gate assigned: {unassignedFlightsCount}");
+    Console.WriteLine($"Total number of Boarding Gates without Flight assigned: {boardingGateDictionary.Values.Count(g => g.Flight == null)}");
+    Console.WriteLine();
+
+    // Assign unassigned flights to available boarding gates
+    int processedFlights = 0;
+    int processedBoardingGate = 0;
+
+    while (flightQueue.Count > 0)
+    {
+        try
+        {
+            Flight flight = flightQueue.Dequeue();
+            bool assigned = false;
+            string specialCode = specialCodeDictionary.ContainsKey(flight.FlightNumber) ? specialCodeDictionary[flight.FlightNumber] : null;
+
+            // Try to assign to a boarding gate with matching special request code first
+            foreach (BoardingGate boardingGate in boardingGateDictionary.Values)
+            {
+                if (boardingGate.Flight == null &&
+                    ((specialCode == "CFFT" && boardingGate.SupportsCFFT) ||
+                     (specialCode == "DDJB" && boardingGate.SupportsDDJB) ||
+                     (specialCode == "LWTT" && boardingGate.SupportsLWTT)))
+                {
+                    boardingGate.Flight = flight;
+
+                    // Display updated flight details
+                    DisplayFlightDetails(flight);
+
+                    assigned = true;
+                    processedFlights++;
+                    processedBoardingGate++;
+                    break;
+                }
+            }
+
+            // If not assigned, try to assign to a boarding gate without special request code
+            if (!assigned)
+            {
+                foreach (BoardingGate boardingGate in boardingGateDictionary.Values)
+                {
+                    if (boardingGate.Flight == null && !boardingGate.SupportsCFFT && !boardingGate.SupportsDDJB && !boardingGate.SupportsLWTT)
+                    {
+                        boardingGate.Flight = flight;
+
+                        // Display updated flight details
+                        DisplayFlightDetails(flight);
+
+                        assigned = true;
+                        processedFlights++;
+                        processedBoardingGate++;
+                        break;
+                    }
+                }
+            }
+
+            if (!assigned)
+            {
+                // If no gate could be assigned, requeue the flight
+                flightQueue.Enqueue(flight);
+                break; // Exit the loop to prevent infinite re-queuing
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+
+    Console.WriteLine();
+    Console.WriteLine($"Total number of Flights processed and assigned: {processedFlights}");
+    Console.WriteLine($"Total number of Boarding Gates processed and assigned: {processedBoardingGate}");
+    Console.WriteLine($"Percentage of Flights automatically assigned: {processedFlights / flightDictionary.Count * 100:F2}%");
+    Console.WriteLine($"Percentage of Boarding Gates automatically assigned: {processedBoardingGate / boardingGateDictionary.Count * 100:F2}%");
+}
+
+void DisplayFlightDetails(Flight flight)
+{
+    string[] parts = flight.FlightNumber.Split(' ');
+    string AirlineCode = parts[0];
+
+    Console.WriteLine($"{flight.FlightNumber,-15}" +
+                      $"{airlineDictionary[AirlineCode].Name,-25}" +
+                      $"{flight.Origin,-20}" +
+                      $"{flight.Destination,-20}" +
+                      $"{flight.ExpectedTime,-25}" +
+                      $"{flight.Status,-15}" +
+                      $"{(specialCodeDictionary.ContainsKey(flight.FlightNumber) ? specialCodeDictionary[flight.FlightNumber] : "None"),-15}" +
+                      $"{getBoardingGateName(flight.FlightNumber)}"
+                    );
 }
