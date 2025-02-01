@@ -1509,3 +1509,66 @@ void DisplayFlightDetails(Flight flight)
                       $"{getBoardingGateName(flight.FlightNumber)}"
                     );
 }
+
+// Additional Feature B 
+
+// Method to check if flights are assigned
+bool AllFlightsAssigned()
+{
+    // Create flight list 
+    List<Flight> flightList = CreateFlightList();
+
+    // Check if all flights have a boarding gate
+    foreach (Flight flight in flightList)
+    {
+        string boardingGateName = getBoardingGateName(flight.FlightNumber);
+        if (boardingGateName == "Unassigned" )
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+// Method to create the flights dictionaries for each airline
+
+Dictionary<string,Flight> CreateFlightDictionaries(string airlineCode)
+{
+    Dictionary<string, Flight> AirlineFlightDict = new();
+    foreach(Flight f in flightDictionary.Values)
+    {
+        // Split flight number into airline code and numbers
+        string[] splittedFlightNumber = f.FlightNumber.Split(" ");
+
+        // Assigning airline code to variable
+        string flightAirline = splittedFlightNumber[0];
+
+        if (flightAirline == airlineCode)
+        {
+            AirlineFlightDict.Add(f.FlightNumber, f);
+        }
+
+
+    }
+    return AirlineFlightDict;
+}
+
+
+void TotalFeePerAirlinePerDay()
+{
+    if (AllFlightsAssigned() == false)
+    {
+        Console.WriteLine("There are flights that have not been assigned a boarding gate.\nEnsure that all flights have been assigned before using this feature.");
+    }
+    else
+    {
+        foreach (Airline a in airlineDictionary.Values)
+        {
+            // Getting airline code
+            string airlineCode = a.Code;
+
+            // Create individual airline flight dictionaries
+            a.Flights = CreateFlightDictionaries(airlineCode);
+        }
+    }
+}
