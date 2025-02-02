@@ -1118,8 +1118,32 @@ void ModifyFlightDetails()
                                         // Modify Status
                                         else if (User_Action2 == "2")
                                         {
-                                            Console.Write("Enter new Status: ");
-                                            flight.Status = Console.ReadLine();
+                                            Console.WriteLine("\n1. Delayed\n2. Boarding\n3. On Time");
+                                            Console.WriteLine("Please select the new status of the flight: ");
+                                            string statusChoice = Console.ReadLine().Trim();
+                                            while (statusChoice != "1" && statusChoice != "2" && statusChoice != "3")
+                                            {
+                                                if (string.IsNullOrWhiteSpace(statusChoice))
+                                                {
+                                                    Console.WriteLine("Choice cannot be empty");
+                                                }
+                                                Console.WriteLine("Invalid choice\n");
+                                                Console.WriteLine("1. Delayed\n2. Boarding\n3. On Time");
+                                                Console.WriteLine("Please select the new status of the flight: ");
+                                                statusChoice = Console.ReadLine().Trim();
+                                            }
+                                            if (statusChoice == "1")
+                                            {
+                                                flightDictionary[flight.FlightNumber].Status = "Delayed";
+                                            }
+                                            else if (statusChoice == "2")
+                                            {
+                                                flightDictionary[flight.FlightNumber].Status = "Boarding";
+                                            }
+                                            else if (statusChoice == "3")
+                                            {
+                                                flightDictionary[flight.FlightNumber].Status = "On Time";
+                                            }
                                         }
 
                                         // Modify Special Request Code
@@ -1140,7 +1164,7 @@ void ModifyFlightDetails()
                                                     if (newSpecialRequestCode == "CFFT" || newSpecialRequestCode == "DDJB" || newSpecialRequestCode == "LWTT")
                                                     {
                                                         specialCodeDictionary[flight.FlightNumber] = newSpecialRequestCode; // Assign the status directly from user input
-                                                        Console.WriteLine($"Status updated to: {flight.Status}");
+                                                        Console.WriteLine($"Special Request Code updated to: {newSpecialRequestCode}");
                                                         break;
                                                     }
 
