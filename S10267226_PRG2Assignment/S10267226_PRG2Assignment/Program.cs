@@ -1132,19 +1132,19 @@ void ModifyFlightDetails()
 
                                                 try
                                                 {
-                                                    string New_Status = Console.ReadLine().Trim().ToUpper();
+                                                    string newSpecialRequestCode = Console.ReadLine().Trim().ToUpper();
 
                                                     // Trim removes whitespace
                                                     // Ensures that when the enters the request code in lower case it is still accepted
                                                     // Special request code can only be CFFT, DDJB, LWTT, or None
-                                                    if (New_Status == "CFFT" || New_Status == "DDJB" || New_Status == "LWTTF")
+                                                    if (newSpecialRequestCode == "CFFT" || newSpecialRequestCode == "DDJB" || newSpecialRequestCode == "LWTT")
                                                     {
-                                                        specialCodeDictionary[flight.FlightNumber] = New_Status; // Assign the status directly from user input
+                                                        specialCodeDictionary[flight.FlightNumber] = newSpecialRequestCode; // Assign the status directly from user input
                                                         Console.WriteLine($"Status updated to: {flight.Status}");
                                                         break;
                                                     }
 
-                                                    else if (New_Status == "NONE")
+                                                    else if (newSpecialRequestCode == "NONE")
                                                     {
                                                         specialCodeDictionary.Add(flight.FlightNumber, "None");
                                                         break;
@@ -1153,12 +1153,12 @@ void ModifyFlightDetails()
 
                                                     else
                                                     {
-                                                        throw new ArgumentException("Invalid Status");
+                                                        throw new ArgumentException("Invalid Special Request Code");
                                                     }
                                                 }
                                                 catch (Exception ex)
                                                 {
-                                                    Console.WriteLine($"Error: {ex.Message} - Please enter a valid status.");
+                                                    Console.WriteLine($"Error: {ex.Message} - Please enter a valid Special Request Code.");
                                                 }
                                             }
                                         }
