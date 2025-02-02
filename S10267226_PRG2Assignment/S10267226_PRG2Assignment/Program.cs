@@ -4,8 +4,8 @@
 // Partner Name : Tan Sheng Zhe Zander
 //===========================================================
 // Features:
-// - Lovette: 2,3,5,6,9
-// - Zander:  1,4,7,8 
+// - Lovette: 2,3,5,6,9, additional feature b
+// - Zander:  1,4,7,8, additional feature a
 //===========================================================
 
 using System.Collections.Specialized;
@@ -900,10 +900,9 @@ void DisplayFlightSchedule()
             {
 
 
-                string flightcode = flight.FlightNumber.Split(' ')[0]; // Check if the flight Selected is in the selected airline
+                string flightcode = flight.FlightNumber.Split(" ")[0]; // Check if the flight Selected is in the selected airline
                 if (airlineCode == flightcode)
                 {
-
 
                     if (flight.FlightNumber == selectedFlightNumber) // Check if the flight number exists
                     {
@@ -927,6 +926,7 @@ void DisplayFlightSchedule()
                             $"{boardingGateDictionary.Values.FirstOrDefault(x => x.Flight?.FlightNumber == flight.FlightNumber)?.GateName ?? "Unassigned",-15}"
                             );
                         return;
+                        
                     }
                 }
             }
@@ -1003,7 +1003,7 @@ void ModifyFlightDetails()
                         Console.WriteLine("Invalid Airline Code");
                         Console.Write("Enter Airline Code: ");
 
-                        airlineCode = Console.ReadLine();
+                        airlineCode = Console.ReadLine().Trim();
 
                     }
 
@@ -1020,7 +1020,7 @@ void ModifyFlightDetails()
             //User Selection Flight Number
 
             Console.WriteLine("Choose an existing Flight to modify or delete:");
-            string ChosenFlight = Console.ReadLine();
+            string ChosenFlight = Console.ReadLine().Trim();
 
             while (true)
             {
@@ -1032,7 +1032,7 @@ void ModifyFlightDetails()
                 {
                     Console.WriteLine("Invalid Flight Number");
                     Console.WriteLine("Choose an existing Flight to modify or delete:");
-                    ChosenFlight = Console.ReadLine();
+                    ChosenFlight = Console.ReadLine().Trim();
                 }
             }
             string[] ChosenFlightSplit = ChosenFlight.Split(' ');
@@ -1095,7 +1095,7 @@ void ModifyFlightDetails()
                                         Console.WriteLine("[4] Modify Boarding Gate");
                                         Console.WriteLine("[5] Exit");
                                         Console.WriteLine("Please enter an option: ");
-                                        string User_Action2 = Console.ReadLine();
+                                        string User_Action2 = Console.ReadLine().Trim();
 
 
                                         // Modify Basic Information
@@ -1276,7 +1276,7 @@ void ModifyFlightDetails()
 
                                             catch (Exception ex)
                                             {
-                                                Console.WriteLine($"{ex}");
+                                                Console.WriteLine($"{ex.Message}");
                                             }
                                         }
 
@@ -1438,7 +1438,7 @@ string getBoardingGateName(string flightNumber)
     
 }
 
-void DisplayFlightsChronologicalOrder()
+void DisplayFlightsChronologicalOrder() // Displays only flights for today. Sorted in chronological order
 {
     List<Flight> flightList = CreateFlightList();
 
