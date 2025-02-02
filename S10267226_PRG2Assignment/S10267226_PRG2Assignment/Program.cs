@@ -1146,7 +1146,7 @@ void ModifyFlightDetails()
 
                                                     else if (newSpecialRequestCode == "NONE")
                                                     {
-                                                        specialCodeDictionary.Add(flight.FlightNumber, "None");
+                                                        specialCodeDictionary[flight.FlightNumber] = "None";
                                                         break;
 
                                                     }
