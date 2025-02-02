@@ -1046,7 +1046,7 @@ void ModifyFlightDetails()
                     Console.WriteLine("[1] Modify Flight");
                     Console.WriteLine("[2] Delete Flight");
                     Console.WriteLine("Pls enter an option");
-                    string User_Action = Console.ReadLine();
+                    string User_Action = Console.ReadLine().Trim();
 
                     // Action 1 - Modify Flight Details
                     if (User_Action == "1")
@@ -1116,6 +1116,8 @@ void ModifyFlightDetails()
                                                     {
                                                         throw new ArgumentException();
                                                     }
+                                                    flight.Origin = origin;
+                                                    flight.Destination = destination;
 
                                                     break;
                                                 }
@@ -1385,6 +1387,10 @@ void ModifyFlightDetails()
                                 Console.WriteLine(ex.Message);
                             }
                         }
+                    }
+                    else
+                    {
+                        throw new ArgumentException("Invalid option.\n");
                     }
                 }
                 catch (Exception ex)
