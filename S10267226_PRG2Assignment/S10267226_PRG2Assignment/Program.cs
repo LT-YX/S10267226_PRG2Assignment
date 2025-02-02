@@ -1101,18 +1101,53 @@ void ModifyFlightDetails()
                                         // Modify Basic Information
                                         if (User_Action2 == "1")
                                         {
-                                            // Reused Function from method 6
-                                            flight.Origin = ValidateOriginDestination(flight.Origin, "Origin");
-                                            // Reused Function from method 6
+                                            //Modify Locations
+                                            while (true)
+                                            {
+                                                try
+                                                {
+                                                    string origin = "";
+                                                    string destination = "";
 
-                                            flight.Destination = ValidateOriginDestination(flight.Destination, "Destination");
+                                                    origin = ValidateOriginDestination(origin, "Origin");
+                                                    destination = ValidateOriginDestination(destination, "Destination");
 
+                                                    if (destination == origin)
+                                                    {
+                                                        throw new ArgumentException();
+                                                    }
+
+                                                    break;
+                                                }
+                                                catch (ArgumentException)
+                                                {
+                                                    Console.WriteLine("Origin and Destination cannot be the same");
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    Console.WriteLine("Unexpected error: " + ex.Message);
+                                                }
+                                            }
 
 
                                             // Modify Time
-                                            string expectedTime = ""; // Place holder value
-                                            DateTime newTime = ValidateExpectedTime(expectedTime);
-                                            flight.ExpectedTime = newTime;
+                                            while(true)
+                                            {
+                                                try
+                                                {
+                                                    string expectedTime = "";
+                                                    DateTime newTime = ValidateExpectedTime(expectedTime);
+                                                    flight.ExpectedTime = newTime;
+                                                    break;
+
+                                                }
+
+                                                catch (Exception Ex)
+                                                {
+                                                    Console.WriteLine(Ex);
+                                                }
+                                            }
+
                                         }
 
                                         // Modify Status
