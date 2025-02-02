@@ -39,6 +39,7 @@ namespace S10267226_PRG2Assignment
             double basefee = 300; // base fee for boarding gates
             double flightFee = Flight.CalculateFees();
             double totalFee = basefee + flightFee;
+      
             return totalFee;
         }
 

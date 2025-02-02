@@ -28,13 +28,13 @@ namespace S10267226_PRG2Assignment
         {
             double fees = 0; 
             fees += RequestFee; // Fee is $150
-            if (Origin == "SIN")
-            {
-                fees += 500.0;
-            }
-            if (Destination == "SIN")
+            if (Origin.ToLower() == "singapore (sin)")
             {
                 fees += 800.0;
+            }
+            if (Destination.ToLower() == "singapore (sin)")
+            {
+                fees += 500.0;
             }
             return fees;
         }

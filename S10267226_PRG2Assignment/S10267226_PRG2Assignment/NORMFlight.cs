@@ -23,14 +23,14 @@ namespace S10267226_PRG2Assignment
         //Methods
         public override double CalculateFees() // Promotions can be applied in program.cs with a method called applyPromotions()
         {
-            double fees = 0; 
-            if (Origin == "SIN")
-            {
-                fees += 500.0;
-            }
-            if (Destination == "SIN")
+            double fees = 0;
+            if (Origin.ToLower() == "singapore (sin)")
             {
                 fees += 800.0;
+            }
+            if (Destination.ToLower() == "singapore (sin)")
+            {
+                fees += 500.0;
             }
             return fees;
         }
