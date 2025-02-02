@@ -185,6 +185,13 @@ string ValidateOriginDestination(string location, string text)
                 throw new ArgumentException("Airport code must contain only 3 letters and enclosed in parantheses ().");
             }
 
+            // Check if parantheses
+            if (airportCode[0] != '(' || airportCode[4] != ')')
+            {
+                throw new ArgumentException("Airport code must be enclosed in parantheses ().");
+
+            }
+
             // Formatting of origin/destination
             location = char.ToUpper(cityName[0]) + cityName.Substring(1).ToLower() + " " + airportCode.ToUpper();
             // Substring(1) means index 1 and onwards
@@ -616,8 +623,9 @@ void CreateNewFlight()
                 // Checks if airline code is in valid airline codes - Airline codes can be 2-3 letters but are usually 2 letters since some flight systems do not account for 3-digit airline codes [IATA Standard]
                 // This code works for airline codes of any length as long as it existed inside airlines.csv
                 ValidatePresence(airlineCodeList, code.ToUpper(), "Invalid airline code for Changi Airport Terminal 5");
+
                 
-                //Checks if number portion of flight number are numbers and of an acceptable length - Numbers can range from 1 to 4 [IATA standard]
+                // Checks if number portion of flight number are numbers and of an acceptable length - Numbers can range from 1 to 4 [IATA standard]
                 if (number.Length < 1 || number.Length > 4 || !number.All(char.IsDigit))
                 {
                     throw new ArgumentException("Back portion of Flight number must contain only 1 to 4 digits");
@@ -1294,6 +1302,8 @@ void ModifyFlightDetails()
                                         {
                                             // Removes flight from flight dictionary
                                             flightDictionary.Remove(flight.FlightNumber);
+                                            specialCodeDictionary.Remove(flight.FlightNumber);
+                                         
                                             Console.WriteLine("Flight has been deleted");
                                             break;
                                         }
