@@ -25,7 +25,7 @@ namespace S10267226_PRG2Assignment
         public BoardingGate() { }
 
         //Parameterized Constructor
-        public BoardingGate(string gateName, bool supportsCFFT, bool supportsDDJB, bool supportsLWTT, Flight? flight)
+        public BoardingGate(string gateName, bool supportsDDJB, bool supportsCFFT, bool supportsLWTT, Flight? flight)
         {
             GateName = gateName;
             SupportsCFFT = supportsCFFT;
@@ -45,7 +45,7 @@ namespace S10267226_PRG2Assignment
 
         public override string ToString()
         {
-            return $"Gate: {GateName,-10} Supports CFFT: {SupportsCFFT,-10} Supports DDJB: {SupportsDDJB,-10} Supports LWTT: {SupportsLWTT,-10} Flight: {Flight}";
+            return $"Gate: {GateName,-10} Supports DDJB: {SupportsDDJB,-10} Supports CFFT: {SupportsCFFT,-10} Supports LWTT: {SupportsLWTT,-10} Flight: {Flight}";
         }
     }
 }
