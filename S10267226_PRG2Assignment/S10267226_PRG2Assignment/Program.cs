@@ -43,7 +43,7 @@ while (option != "0")
 {
     DisplayMenu();
     Console.WriteLine("Please select your option: ");
-    option = Console.ReadLine();
+    option = Console.ReadLine().Trim();
 
     switch(option)
     {
@@ -502,7 +502,7 @@ void assignBoardingGate()
     // Updating Flight Status
     string input;
     Console.WriteLine("Would you like to update the status of the flight? (Y/N)");
-    input = Console.ReadLine().ToUpper();
+    input = Console.ReadLine().Trim().ToUpper();
     while (input != "Y" && input != "N")
     {
         if (string.IsNullOrWhiteSpace(input))
@@ -517,7 +517,7 @@ void assignBoardingGate()
     {
         Console.WriteLine("\n1. Delayed\n2. Boarding\n3. On Time");
         Console.WriteLine("Please select the new status of the flight: ");
-        string statusChoice = Console.ReadLine();
+        string statusChoice = Console.ReadLine().Trim();
         while (statusChoice != "1" && statusChoice != "2" && statusChoice != "3")
         {
             if (string.IsNullOrWhiteSpace(statusChoice))
@@ -527,7 +527,7 @@ void assignBoardingGate()
             Console.WriteLine("Invalid choice\n");
             Console.WriteLine("1. Delayed\n2. Boarding\n3. On Time");
             Console.WriteLine("Please select the new status of the flight: ");
-            statusChoice = Console.ReadLine();
+            statusChoice = Console.ReadLine().Trim();
         }
         if (statusChoice == "1")
         {
@@ -763,7 +763,7 @@ void CreateNewFlight()
             try
             {
                 Console.WriteLine("Would you like to add another flight? (Y/N): ");
-                repeat = Console.ReadLine().ToUpper();
+                repeat = Console.ReadLine().Trim().ToUpper();
                 if (repeat != "Y" && repeat != "N")
                 {
                     // Tells the user it cannot be empty
@@ -955,7 +955,7 @@ void ModifyFlightDetails()
             //User Selection of Airline
 
             Console.Write("Pls enter the airline Code: ");
-            string airlineCode = Console.ReadLine();
+            string airlineCode = Console.ReadLine().Trim();
 
 
 
