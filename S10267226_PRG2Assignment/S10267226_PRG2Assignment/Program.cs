@@ -1507,6 +1507,7 @@ void ProcessUnassignedFlights()
     Console.WriteLine($"Total number of Boarding Gates processed and assigned: {processedBoardingGate}");
     Console.WriteLine($"Percentage of Flights automatically assigned: {processedFlights / flightDictionary.Values.Count * 100:F2}%");
     Console.WriteLine($"Percentage of Boarding Gates automatically assigned: {((float)processedBoardingGate / boardingGateDictionary.Values.Count) * 100:F2}%");
+
 }
 
 void DisplayFlightDetails(Flight flight)
